@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Academic resume website for Yuhang Yang."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      const root = document.documentElement;
+      const preferred = localStorage.getItem("site-language") || "en";
+      const setLanguage = (language) => {
+        const next = language === "zh" ? "zh" : "en";
+        root.dataset.lang = next;
+        root.lang = next === "zh" ? "zh-CN" : "en";
+        localStorage.setItem("site-language", next);
+        document.querySelectorAll("[data-language-button]").forEach((button) => {
+          const active = button.dataset.languageButton === next;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+      };
+
+      setLanguage(preferred);
+
+      document.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-language-button]");
+        if (!button) return;
+        setLanguage(button.dataset.languageButton);
+      });
+
+      const main = document.querySelector("[data-scroll-main]");
+      const sections = Array.from(document.querySelectorAll(".sec[id]"));
+      const links = Array.from(document.querySelectorAll(".tnav-link[href^='#']"));
+
+      if (main && sections.length && links.length) {
+        const setActiveSection = () => {
+          const top = main.scrollTop + 72;
+          let current = sections[0].id;
+          sections.forEach((section) => {
+            if (section.offsetTop <= top) current = section.id;
+          });
+          links.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+          });
+        };
+
+        main.addEventListener("scroll", setActiveSection, { passive: true });
+        links.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            const target = document.querySelector(link.getAttribute("href"));
+            if (!target) return;
+            event.preventDefault();
+            main.scrollTo({ top: target.offsetTop - 10, behavior: "smooth" });
+            window.history.replaceState(null, "", link.getAttribute("href"));
+          });
+        });
+        setActiveSection();
+      }
+    </script>
+  </body>
+</html>
