@@ -1,0 +1,225 @@
+---
+import Sidebar from "../../components/Sidebar.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { awards, education, internships, profile, projects, publications } from "../../data/profile";
+
+const navItems = [
+  { href: "#about", en: "About", zh: "关于" },
+  { href: "#education", en: "Education", zh: "教育" },
+  { href: "#internships", en: "Internships", zh: "实习" },
+  { href: "#projects", en: "Projects", zh: "项目" },
+  { href: "#publications", en: "Publications", zh: "论文" },
+  { href: "#awards", en: "Awards", zh: "奖项" }
+];
+const localizePeriod = (period: string) => period.replace("Present", "现在");
+---
+
+<BaseLayout title={`${profile.name} | Profile`} description={profile.intro.en}>
+  <div class="shell">
+    <Sidebar />
+
+    <main class="main" id="main" data-scroll-main>
+      <nav class="topnav" aria-label="Profile sections">
+        {
+          navItems.map((item, index) => (
+            <a class:list={["tnav-link", index === 0 && "active"]} href={item.href}>
+              <span data-locale="en">{item.en}</span>
+              <span data-locale="zh">{item.zh}</span>
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="body">
+        <section class="sec" id="about">
+          <div class="sec-h">
+            <span data-locale="en">About</span>
+            <span data-locale="zh">关于</span>
+          </div>
+          <p class="about-p">
+            <span data-locale="en">{profile.intro.en}</span>
+            <span data-locale="zh">{profile.intro.zh}</span>
+          </p>
+          <p class="about-p">
+            <span data-locale="en">{profile.focus.en}</span>
+            <span data-locale="zh">{profile.focus.zh}</span>
+          </p>
+          <div class="tags">
+            {
+              profile.interests.map((interest) => (
+                <span class="tag">
+                  <span data-locale="en">{interest.en}</span>
+                  <span data-locale="zh">{interest.zh}</span>
+                </span>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sec" id="education">
+          <div class="sec-h">
+            <span data-locale="en">Education</span>
+            <span data-locale="zh">教育经历</span>
+          </div>
+          <div class="tl">
+            {
+              education.map((item, index) => (
+                <div class="tl-row">
+                  <div class="tl-spine">
+                    <div class:list={["dot", index > 0 && "dot-dim"]}></div>
+                    {index < education.length - 1 && <div class="spine-line"></div>}
+                  </div>
+                  <div class="tl-card">
+                    <div class="tl-period">
+                      <span data-locale="en">{item.period}</span>
+                      <span data-locale="zh">{localizePeriod(item.period)}</span>
+                    </div>
+                    <div class="tl-title">
+                      <span data-locale="en">{item.title.en}</span>
+                      <span data-locale="zh">{item.title.zh}</span>
+                    </div>
+                    <div class="tl-inst">
+                      <span data-locale="en">{item.subtitle.en}</span>
+                      <span data-locale="zh">{item.subtitle.zh}</span>
+                    </div>
+                    {item.description.en && (
+                      <div class="tl-desc">
+                        <span data-locale="en">{item.description.en}</span>
+                        <span data-locale="zh">{item.description.zh}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sec" id="internships">
+          <div class="sec-h">
+            <span data-locale="en">Internships</span>
+            <span data-locale="zh">实习经历</span>
+          </div>
+          <div class="tl">
+            {
+              internships.map((item, index) => (
+                <div class="tl-row">
+                  <div class="tl-spine">
+                    <div class:list={["dot", index > 0 && "dot-dim"]}></div>
+                    {index < internships.length - 1 && <div class="spine-line"></div>}
+                  </div>
+                  <div class="tl-card">
+                    <div class="tl-period">
+                      <span data-locale="en">{item.period}</span>
+                      <span data-locale="zh">{localizePeriod(item.period)}</span>
+                    </div>
+                    <div class="tl-title">
+                      <span data-locale="en">{item.title.en}</span>
+                      <span data-locale="zh">{item.title.zh}</span>
+                      <span class="badge b-prep">
+                        <span data-locale="en">Placeholder</span>
+                        <span data-locale="zh">占位</span>
+                      </span>
+                    </div>
+                    <div class="tl-inst">
+                      <span data-locale="en">{item.subtitle.en}</span>
+                      <span data-locale="zh">{item.subtitle.zh}</span>
+                    </div>
+                    <div class="tl-desc">
+                      <span data-locale="en">{item.description.en}</span>
+                      <span data-locale="zh">{item.description.zh}</span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sec" id="projects">
+          <div class="sec-h">
+            <span data-locale="en">Projects</span>
+            <span data-locale="zh">项目</span>
+          </div>
+          {
+            projects.map((project) => (
+              <div class="pub-card">
+                <div class="pub-title">
+                  <span data-locale="en">{project.title.en}</span>
+                  <span data-locale="zh">{project.title.zh}</span>
+                  <span class="badge b-wip">
+                    <span data-locale="en">{project.status.en}</span>
+                    <span data-locale="zh">{project.status.zh}</span>
+                  </span>
+                </div>
+                <div class="pub-meta">
+                  <span data-locale="en">{project.role.en}</span>
+                  <span data-locale="zh">{project.role.zh}</span>
+                  <span> · </span>
+                  <span data-locale="en">{project.period}</span>
+                  <span data-locale="zh">{localizePeriod(project.period)}</span>
+                </div>
+                <p class="pub-summary">
+                  <span data-locale="en">{project.summary.en}</span>
+                  <span data-locale="zh">{project.summary.zh}</span>
+                </p>
+              </div>
+            ))
+          }
+        </section>
+
+        <section class="sec" id="publications">
+          <div class="sec-h">
+            <span data-locale="en">Publications</span>
+            <span data-locale="zh">论文</span>
+          </div>
+          {
+            publications.map((publication) => (
+              <div class="pub-card">
+                <div class="pub-title">
+                  <span data-locale="en">{publication.title.en}</span>
+                  <span data-locale="zh">{publication.title.zh}</span>
+                  <span class="badge b-prep">
+                    <span data-locale="en">{publication.status.en}</span>
+                    <span data-locale="zh">{publication.status.zh}</span>
+                  </span>
+                </div>
+                <div class="pub-meta">{publication.authors} · {publication.year}</div>
+                <p class="pub-summary">
+                  <span data-locale="en">{publication.summary.en}</span>
+                  <span data-locale="zh">{publication.summary.zh}</span>
+                </p>
+              </div>
+            ))
+          }
+        </section>
+
+        <section class="sec" id="awards">
+          <div class="sec-h">
+            <span data-locale="en">Awards</span>
+            <span data-locale="zh">奖项</span>
+          </div>
+          <div class="award-list">
+            {
+              awards.map((item) => (
+                <div class="award-item">
+                  <div class="award-yr">{item.period}</div>
+                  <div>
+                    <div class="award-name">
+                      <span data-locale="en">{item.title.en}</span>
+                      <span data-locale="zh">{item.title.zh}</span>
+                    </div>
+                    <div class="award-org">
+                      <span data-locale="en">{item.subtitle.en}</span>
+                      <span data-locale="zh">{item.subtitle.zh}</span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</BaseLayout>

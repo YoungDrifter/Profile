@@ -1,0 +1,22 @@
+{
+  "name": "yuhangyang-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/sitemap": "^3.4.1",
+    "astro": "^5.7.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "simple-icons": "^16.20.0"
+  }
+}
