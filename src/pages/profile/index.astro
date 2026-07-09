@@ -1,7 +1,7 @@
 ---
 import Sidebar from "../../components/Sidebar.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { awards, education, internships, profile, projects, publications } from "../../data/profile";
+import { competitions, education, honors, internships, profile, projects, publications } from "../../data/profile";
 
 const navItems = [
   { href: "#about", en: "About", zh: "关于" },
@@ -9,7 +9,8 @@ const navItems = [
   { href: "#internships", en: "Internships", zh: "实习" },
   { href: "#projects", en: "Projects", zh: "项目" },
   { href: "#publications", en: "Publications", zh: "论文" },
-  { href: "#awards", en: "Awards", zh: "奖项" }
+  { href: "#competitions", en: "Competitions", zh: "竞赛经历" },
+  { href: "#honors", en: "Honors", zh: "荣誉奖项" }
 ];
 const localizePeriod = (period: string) => period.replace("Present", "现在");
 ---
@@ -39,10 +40,6 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
           <p class="about-p">
             <span data-locale="en">{profile.intro.en}</span>
             <span data-locale="zh">{profile.intro.zh}</span>
-          </p>
-          <p class="about-p">
-            <span data-locale="en">{profile.focus.en}</span>
-            <span data-locale="zh">{profile.focus.zh}</span>
           </p>
           <div class="tags">
             {
@@ -116,10 +113,6 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                     <div class="tl-title">
                       <span data-locale="en">{item.title.en}</span>
                       <span data-locale="zh">{item.title.zh}</span>
-                      <span class="badge b-prep">
-                        <span data-locale="en">Placeholder</span>
-                        <span data-locale="zh">占位</span>
-                      </span>
                     </div>
                     <div class="tl-inst">
                       <span data-locale="en">{item.subtitle.en}</span>
@@ -147,10 +140,6 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                 <div class="pub-title">
                   <span data-locale="en">{project.title.en}</span>
                   <span data-locale="zh">{project.title.zh}</span>
-                  <span class="badge b-wip">
-                    <span data-locale="en">{project.status.en}</span>
-                    <span data-locale="zh">{project.status.zh}</span>
-                  </span>
                 </div>
                 <div class="pub-meta">
                   <span data-locale="en">{project.role.en}</span>
@@ -179,12 +168,15 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                 <div class="pub-title">
                   <span data-locale="en">{publication.title.en}</span>
                   <span data-locale="zh">{publication.title.zh}</span>
-                  <span class="badge b-prep">
-                    <span data-locale="en">{publication.status.en}</span>
-                    <span data-locale="zh">{publication.status.zh}</span>
-                  </span>
                 </div>
-                <div class="pub-meta">{publication.authors} · {publication.year}</div>
+                <div class="pub-meta">
+                  {publication.authors}
+                  <span> · </span>
+                  <span data-locale="en">{publication.venue.en}</span>
+                  <span data-locale="zh">{publication.venue.zh}</span>
+                  <span> · </span>
+                  {publication.year}
+                </div>
                 <p class="pub-summary">
                   <span data-locale="en">{publication.summary.en}</span>
                   <span data-locale="zh">{publication.summary.zh}</span>
@@ -194,17 +186,43 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
           }
         </section>
 
-        <section class="sec" id="awards">
+        <section class="sec" id="competitions">
           <div class="sec-h">
-            <span data-locale="en">Awards</span>
-            <span data-locale="zh">奖项</span>
+            <span data-locale="en">Competitions</span>
+            <span data-locale="zh">竞赛经历</span>
           </div>
           <div class="award-list">
             {
-              awards.map((item) => (
+              competitions.map((item) => (
                 <div class="award-item">
                   <div class="award-yr">{item.period}</div>
-                  <div>
+                  <div class="award-main">
+                    <div class="award-name">
+                      <span data-locale="en">{item.title.en}</span>
+                      <span data-locale="zh">{item.title.zh}</span>
+                    </div>
+                    <div class="award-org">
+                      <span data-locale="en">{item.subtitle.en}</span>
+                      <span data-locale="zh">{item.subtitle.zh}</span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sec" id="honors">
+          <div class="sec-h">
+            <span data-locale="en">Honors</span>
+            <span data-locale="zh">荣誉奖项</span>
+          </div>
+          <div class="award-list">
+            {
+              honors.map((item) => (
+                <div class="award-item">
+                  <div class="award-yr">{item.period}</div>
+                  <div class="award-main">
                     <div class="award-name">
                       <span data-locale="en">{item.title.en}</span>
                       <span data-locale="zh">{item.title.zh}</span>

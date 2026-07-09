@@ -52,13 +52,23 @@ const {
       const main = document.querySelector("[data-scroll-main]");
       const sections = Array.from(document.querySelectorAll(".sec[id]"));
       const links = Array.from(document.querySelectorAll(".tnav-link[href^='#']"));
+      const topnav = document.querySelector(".topnav");
 
       if (main && sections.length && links.length) {
+        const usesMainScroll = () => getComputedStyle(main).overflowY !== "visible" && main.scrollHeight > main.clientHeight;
+
+        const getSectionTop = (section) => {
+          if (usesMainScroll()) return section.offsetTop;
+          return section.getBoundingClientRect().top + window.scrollY;
+        };
+
         const setActiveSection = () => {
-          const top = main.scrollTop + 72;
+          const top = usesMainScroll()
+            ? main.scrollTop + 72
+            : window.scrollY + (topnav?.offsetHeight || 0) + 16;
           let current = sections[0].id;
           sections.forEach((section) => {
-            if (section.offsetTop <= top) current = section.id;
+            if (getSectionTop(section) <= top) current = section.id;
           });
           links.forEach((link) => {
             link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
@@ -66,12 +76,21 @@ const {
         };
 
         main.addEventListener("scroll", setActiveSection, { passive: true });
+        window.addEventListener("scroll", setActiveSection, { passive: true });
+        window.addEventListener("resize", setActiveSection);
         links.forEach((link) => {
           link.addEventListener("click", (event) => {
             const target = document.querySelector(link.getAttribute("href"));
             if (!target) return;
             event.preventDefault();
-            main.scrollTo({ top: target.offsetTop - 10, behavior: "smooth" });
+            if (usesMainScroll()) {
+              main.scrollTo({ top: target.offsetTop - 10, behavior: "smooth" });
+            } else {
+              window.scrollTo({
+                top: target.getBoundingClientRect().top + window.scrollY - (topnav?.offsetHeight || 0) - 10,
+                behavior: "smooth"
+              });
+            }
             window.history.replaceState(null, "", link.getAttribute("href"));
           });
         });
