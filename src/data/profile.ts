@@ -9,6 +9,12 @@ export type TimelineItem = {
   description: Localized;
 };
 
+export type RecognitionItem = {
+  period: string;
+  title: Localized;
+  subtitle: Localized;
+};
+
 export type Project = {
   period: string;
   status: Localized;
@@ -19,7 +25,7 @@ export type Project = {
 
 export type Publication = {
   year: string;
-  status: Localized;
+  venue: Localized;
   title: Localized;
   authors: string;
   summary: Localized;
@@ -31,39 +37,38 @@ export const profile = {
     en: "Yuhang Yang",
     zh: "阳宇航"
   },
-  alternateName: "Emrys Yang",
   role: {
-    en: "Undergraduate Student in Mathematics",
-    zh: "数学专业本科生"
+    en: "Undergraduate Student",
+    zh: "本科生"
   },
   institution: {
-    en: "School of Mathematics, Nanjing University",
-    zh: "南京大学数学学院"
+    en: "Nanjing University",
+    zh: "南京大学"
   },
   location: {
     en: "Nanjing, China",
-    zh: "中国南京"
+    zh: "中国 · 南京"
   },
   email: "yuhangyang@smail.nju.edu.cn",
   avatar: "/images/avatar.png",
   cv: "/files/cv.pdf",
-  intro: {
-    en: "I am an undergraduate student in mathematics at Nanjing University. My current interests lie in probability theory, mathematical analysis, and the mathematical structure of learning systems.",
-    zh: "我是南京大学数学专业本科生，目前关注概率论、数学分析，以及学习系统背后的数学结构。"
+  motto: {
+    en: "Search the World and Find Myself",
+    zh: "看世界也找自己"
   },
-  focus: {
-    en: "I hope to understand learning models through probability, analysis, and rigorous abstraction, while keeping implementation close enough to sharpen the questions.",
-    zh: "我希望用概率、分析和严谨的抽象理解学习模型，同时通过实现与实验让问题保持具体。"
+  intro: {
+    en: "I am an undergraduate student in mathematics at Nanjing University. I am drawn to the beauty, rigor, and absolute logic of mathematics, and I am equally fascinated by the rapid development of artificial intelligence and machine learning. I hope to study AI through mathematics, using precise reasoning to understand the ideas behind modern learning systems. In both study and life, I value careful work, continuous refinement, and the pursuit of excellence.",
+    zh: "我是南京大学数学专业本科生。我热爱数学的美感、严谨与绝对逻辑，也对人工智能和机器学习的迅速发展感到震撼并充满憧憬。我希望继续学习 AI，并尝试用数学的语言和推理去理解现代学习系统背后的思想。在生活和学习中，我重视一丝不苟的态度、持续打磨的过程，以及对更高标准的追求。"
   },
   socials: [
-    { label: "GitHub", url: "https://github.com/EmrysBlake" },
-    { label: "X", url: "https://x.com/EmrysBlakeYang" },
-    { label: "知乎", url: "https://www.zhihu.com/people/74-44-50-26-39" },
-    { label: "小红书", url: "https://www.xiaohongshu.com/user/profile/692941e000000000380194d0" }
+    { label: "GitHub", url: "https://github.com/YoungDrifter" },
+    { label: "X", url: "https://x.com/Yuhangar" },
+    { label: "Zhihu", url: "https://www.zhihu.com/people/emrysyang" },
+    { label: "Xiaohongshu", url: "https://www.xiaohongshu.com/user/profile/6a0dd2930000000001007000" }
   ],
   interests: [
+    { en: "Computational Mathematics", zh: "计算数学" },
     { en: "Probability Theory", zh: "概率论" },
-    { en: "Mathematical Analysis", zh: "数学分析" },
     { en: "Deep Learning", zh: "深度学习" },
     { en: "Machine Learning Theory", zh: "机器学习理论" }
   ]
@@ -74,15 +79,15 @@ export const education: TimelineItem[] = [
     period: "2024 – Present",
     title: {
       en: "Nanjing University",
-      zh: "南京大学数学学院"
+      zh: "南京大学"
     },
     subtitle: {
-      en: "BSc in Mathematics · School of Mathematics",
-      zh: "数学专业本科"
+      en: "University",
+      zh: "大学"
     },
     description: {
-      en: "Second-year undergraduate student, building a foundation in mathematical analysis, probability, algebra, and machine learning.",
-      zh: "本科二年级，持续夯实数学分析、概率论、代数与机器学习基础。"
+      en: "Building a foundation in analysis, probability, algebra, computational mathematics, and learning theory while exploring how these areas meet in modern models.",
+      zh: "持续夯实分析、概率、代数、计算数学与学习理论基础，并探索它们在现代模型中的交汇。"
     }
   },
   {
@@ -92,12 +97,12 @@ export const education: TimelineItem[] = [
       zh: "衡阳市第八中学"
     },
     subtitle: {
-      en: "High School Diploma",
+      en: "High School",
       zh: "高中"
     },
     description: {
-      en: "A formative period for learning habits, problem solving, and mathematical intuition.",
-      zh: "学习习惯、问题意识与数学直觉逐渐形成的重要阶段。"
+      en: "Developed study habits, problem-solving discipline, and an early interest in mathematical thinking.",
+      zh: "在这一阶段逐渐形成学习习惯、解题训练与对数学思维的兴趣。"
     }
   }
 ];
@@ -114,13 +119,13 @@ export const internships: TimelineItem[] = [
       zh: "待补充"
     },
     description: {
-      en: "A placeholder for future research, industry, or academic internship experiences.",
-      zh: "这里暂时作为未来科研、企业或学术实习经历的占位。"
+      en: "Reserved for future research, industry, or academic internship experiences once they are ready to present.",
+      zh: "预留给未来可以正式展示的科研、企业或学术实习经历。"
     }
   }
 ];
 
-export const awards: TimelineItem[] = [
+export const honors: RecognitionItem[] = [
   {
     period: "2025.12",
     title: {
@@ -130,12 +135,11 @@ export const awards: TimelineItem[] = [
     subtitle: {
       en: "Nanjing University",
       zh: "南京大学"
-    },
-    description: {
-      en: "Awarded in recognition of academic performance and overall development.",
-      zh: "因学业表现与综合发展获得认可。"
     }
-  },
+  }
+];
+
+export const competitions: RecognitionItem[] = [
   {
     period: "2025.11",
     title: {
@@ -145,10 +149,6 @@ export const awards: TimelineItem[] = [
     subtitle: {
       en: "Chinese Mathematical Society",
       zh: "中国数学会"
-    },
-    description: {
-      en: "Recognized for mathematical problem-solving ability.",
-      zh: "在本科数学竞赛中体现较强的问题解决能力。"
     }
   },
   {
@@ -160,10 +160,6 @@ export const awards: TimelineItem[] = [
     subtitle: {
       en: "CSIAM",
       zh: "中国工业与应用数学学会"
-    },
-    description: {
-      en: "Completed a team-based modeling project focused on quantitative analysis.",
-      zh: "完成团队建模项目，围绕结构化定量分析展开。"
     }
   }
 ];
@@ -193,9 +189,9 @@ export const projects: Project[] = [
 export const publications: Publication[] = [
   {
     year: "2026",
-    status: {
-      en: "In Preparation",
-      zh: "准备中"
+    venue: {
+      en: "Venue TBD",
+      zh: "发表地点待定"
     },
     title: {
       en: "Publication Placeholder",
