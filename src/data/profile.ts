@@ -29,6 +29,7 @@ export type Publication = {
   title: Localized;
   authors: string;
   summary: Localized;
+  pdf?: string;
 };
 
 export const profile = {
@@ -198,6 +199,7 @@ export const publications: Publication[] = [
       zh: "论文占位"
     },
     authors: "Yuhang Yang",
+    pdf: "/files/publication-placeholder.pdf",
     summary: {
       en: "A reserved space for future research writing or formal publications.",
       zh: "这里暂时作为未来研究写作或正式论文的占位。"
