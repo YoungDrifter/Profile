@@ -223,19 +223,31 @@ svg {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 28px;
+  width: 24px;
   height: 28px;
-  border: 1px solid color-mix(in srgb, var(--brand-color) 18%, transparent);
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--brand-color) 7%, white);
   color: var(--brand-color);
 }
 
 .s-link .brand-icon {
-  width: 14px;
-  height: 14px;
+  width: 17px;
+  height: 17px;
   fill: currentColor;
   stroke: none;
+}
+
+.s-brand-mark[data-brand="x"] .brand-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.s-brand-mark[data-brand="zhihu"] .brand-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.s-brand-mark[data-brand="xiaohongshu"] .brand-icon {
+  width: 22px;
+  height: 22px;
 }
 
 .s-link-label {

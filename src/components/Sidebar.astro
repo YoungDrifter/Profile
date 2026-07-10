@@ -16,6 +16,13 @@ const getBrandIcon = (item: { label: string; url: string }) => {
   if (item.url.includes("zhihu.com")) return brandIcons.zhihu;
   return brandIcons.xiaohongshu;
 };
+
+const getBrandKey = (item: { url: string }) => {
+  if (item.url.includes("github.com")) return "github";
+  if (item.url.includes("x.com")) return "x";
+  if (item.url.includes("zhihu.com")) return "zhihu";
+  return "xiaohongshu";
+};
 ---
 
 <aside class="sidebar">
@@ -57,7 +64,7 @@ const getBrandIcon = (item: { label: string; url: string }) => {
   <div class="s-links">
     {profile.socials.map((item) => (
       <a class="s-link" href={item.url} target="_blank" rel="noopener noreferrer" style={`--brand-color: #${getBrandIcon(item).hex}`}>
-        <span class="s-brand-mark" aria-hidden="true">
+        <span class="s-brand-mark" data-brand={getBrandKey(item)} aria-hidden="true">
           <svg class="brand-icon" viewBox="0 0 24 24">
             <path d={getBrandIcon(item).path}></path>
           </svg>
