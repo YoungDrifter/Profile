@@ -190,7 +190,9 @@ export const projects: Project[] = [
     summary: {
       en: "A reserved space for a future selected project. Details can be added when the work is ready to present.",
       zh: "这里暂时作为未来精选项目的占位，待项目成熟后再补充具体内容。"
-    }
+    },
+    pdf: "/files/project-placeholder.pdf",
+    code: "https://github.com/youngdrifter/Profile"
   }
 ];
 
@@ -206,10 +208,10 @@ export const publications: Publication[] = [
       zh: "论文占位"
     },
     authors: "Yuhang Yang",
-    pdf: "/files/publication-placeholder.pdf",
     summary: {
       en: "A reserved space for future research writing or formal publications.",
       zh: "这里暂时作为未来研究写作或正式论文的占位。"
-    }
+    },
+    pdf: "/files/publication-placeholder.pdf"
   }
 ];
