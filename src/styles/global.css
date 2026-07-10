@@ -558,6 +558,7 @@ svg {
 }
 
 .pub-action {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -583,6 +584,53 @@ svg {
 .pub-action svg {
   width: 14px;
   height: 14px;
+}
+
+.pub-action.is-unavailable {
+  border-color: var(--border);
+  background: #f7f7f6;
+  color: var(--ink-4);
+  cursor: help;
+}
+
+.pub-action.is-unavailable:hover,
+.pub-action.is-unavailable:focus-visible {
+  border-color: #d7d5d2;
+  background: #f4f3f1;
+  color: var(--ink-3);
+}
+
+.pub-action.is-unavailable::after {
+  position: absolute;
+  z-index: 40;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  width: max-content;
+  max-width: min(230px, 72vw);
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: rgba(30, 31, 34, 0.94);
+  color: #ffffff;
+  content: attr(data-tooltip-en);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.14s, transform 0.14s;
+}
+
+html[data-lang="zh"] .pub-action.is-unavailable::after {
+  content: attr(data-tooltip-zh);
+}
+
+.pub-action.is-unavailable:hover::after,
+.pub-action.is-unavailable:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .award-list {
