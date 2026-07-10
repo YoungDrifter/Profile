@@ -53,6 +53,10 @@ export const profile = {
     en: "Nanjing, China",
     zh: "中国 · 南京"
   },
+  study: {
+    en: "Mathematics · Expected 2028",
+    zh: "数学专业 · 预计 2028 年毕业"
+  },
   email: "yuhangyang@smail.nju.edu.cn",
   avatar: "/images/avatar.png",
   cv: "/files/cv.pdf",

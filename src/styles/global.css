@@ -189,7 +189,7 @@ svg {
 .s-links {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
   margin-top: 1.35rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--border-soft);
@@ -199,30 +199,63 @@ svg {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 7px 8px;
-  border-radius: 6px;
+  min-height: 40px;
+  padding: 5px 7px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   color: var(--ink-2);
   font-size: 12px;
   line-height: 1.35;
   transition:
+    border-color 0.13s,
     background 0.13s,
     color 0.13s;
 }
 
 .s-link:hover {
-  background: #edf1f5;
-  color: var(--accent);
+  border-color: rgba(226, 225, 223, 0.9);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
 }
 
-.s-link svg {
+.s-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 14px;
-  height: 14px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid color-mix(in srgb, var(--brand-color) 18%, transparent);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--brand-color) 7%, white);
+  color: var(--brand-color);
 }
 
 .s-link .brand-icon {
+  width: 14px;
+  height: 14px;
   fill: currentColor;
   stroke: none;
+}
+
+.s-link-label {
+  flex: 1;
+  font-weight: 400;
+}
+
+.s-link-arrow {
+  width: 13px;
+  height: 13px;
+  color: var(--ink-4);
+  opacity: 0;
+  transform: translate(-2px, 2px);
+  transition: opacity 0.13s, transform 0.13s;
+}
+
+.s-link:hover .s-link-arrow,
+.s-link:focus-visible .s-link-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
 }
 
 .language-switch {
@@ -947,6 +980,14 @@ html[data-lang="zh"] .pub-action.is-unavailable::after {
 
   .s-link {
     justify-content: center;
+  }
+
+  .s-link-label {
+    flex: 0 1 auto;
+  }
+
+  .s-link-arrow {
+    display: none;
   }
 
   .s-row {

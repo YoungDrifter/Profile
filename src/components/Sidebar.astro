@@ -20,7 +20,7 @@ const getBrandIcon = (item: { label: string; url: string }) => {
 
 <aside class="sidebar">
   <div class="s-head">
-    <a class="avatar" href="/profile/" aria-label="Yuhang Yang profile">
+    <a class="avatar" href="/" aria-label="Yuhang Yang profile">
       <img src={profile.avatar} alt={profile.displayName.en} />
     </a>
     <div class="s-name">
@@ -43,6 +43,11 @@ const getBrandIcon = (item: { label: string; url: string }) => {
       <span data-locale="en">{profile.location.en}</span>
       <span data-locale="zh">{profile.location.zh}</span>
     </div>
+    <div class="s-row">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14.25 3.75 9.75 12 5.25l8.25 4.5L12 14.25Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 11.4v4.35c0 1.55 2.35 2.8 5.25 2.8s5.25-1.25 5.25-2.8V11.4M20.25 9.75v5.25"/></svg>
+      <span data-locale="en">{profile.study.en}</span>
+      <span data-locale="zh">{profile.study.zh}</span>
+    </div>
     <a class="s-row" href={mailHref}>
       <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
       {profile.email}
@@ -51,11 +56,14 @@ const getBrandIcon = (item: { label: string; url: string }) => {
 
   <div class="s-links">
     {profile.socials.map((item) => (
-      <a class="s-link" href={item.url} target="_blank" rel="noreferrer">
-        <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d={getBrandIcon(item).path}></path>
-        </svg>
-        {item.label}
+      <a class="s-link" href={item.url} target="_blank" rel="noopener noreferrer" style={`--brand-color: #${getBrandIcon(item).hex}`}>
+        <span class="s-brand-mark" aria-hidden="true">
+          <svg class="brand-icon" viewBox="0 0 24 24">
+            <path d={getBrandIcon(item).path}></path>
+          </svg>
+        </span>
+        <span class="s-link-label">{item.label}</span>
+        <svg class="s-link-arrow" fill="none" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5h8v8M15 5 6 14" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     ))}
   </div>
