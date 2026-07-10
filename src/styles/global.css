@@ -552,10 +552,12 @@ svg {
 
 .pub-actions {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 0.9rem;
 }
 
-.pub-pdf {
+.pub-action {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -572,13 +574,13 @@ svg {
   transition: border-color 0.16s, background 0.16s, color 0.16s;
 }
 
-.pub-pdf:hover {
+.pub-action:hover {
   border-color: #aebfce;
   background: #e8eef3;
   color: var(--accent-h);
 }
 
-.pub-pdf svg {
+.pub-action svg {
   width: 14px;
   height: 14px;
 }

@@ -185,6 +185,27 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   <span data-locale="en">{project.summary.en}</span>
                   <span data-locale="zh">{project.summary.zh}</span>
                 </p>
+                {(project.pdf || project.code) && (
+                  <div class="pub-actions">
+                    {project.pdf && (
+                      <a class="pub-action" href={project.pdf} target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        PDF
+                      </a>
+                    )}
+                    {project.code && (
+                      <a class="pub-action" href={project.code} target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Code
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             ))
           }
@@ -214,15 +235,25 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   <span data-locale="en">{publication.summary.en}</span>
                   <span data-locale="zh">{publication.summary.zh}</span>
                 </p>
-                {publication.pdf && (
+                {(publication.pdf || publication.code) && (
                   <div class="pub-actions">
-                    <a class="pub-pdf" href={publication.pdf} target="_blank" rel="noopener noreferrer">
-                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                        <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                      </svg>
-                      PDF
-                    </a>
+                    {publication.pdf && (
+                      <a class="pub-action" href={publication.pdf} target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        PDF
+                      </a>
+                    )}
+                    {publication.code && (
+                      <a class="pub-action" href={publication.code} target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Code
+                      </a>
+                    )}
                   </div>
                 )}
               </div>

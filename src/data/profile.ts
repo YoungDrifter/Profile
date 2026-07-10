@@ -21,6 +21,8 @@ export type Project = {
   role: Localized;
   title: Localized;
   summary: Localized;
+  pdf?: string;
+  code?: string;
 };
 
 export type Publication = {
@@ -30,6 +32,7 @@ export type Publication = {
   authors: string;
   summary: Localized;
   pdf?: string;
+  code?: string;
 };
 
 export const profile = {
