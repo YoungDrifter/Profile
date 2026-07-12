@@ -65,8 +65,8 @@ export const profile = {
     zh: "看世界也找自己"
   },
   intro: {
-    en: "I am an undergraduate student in mathematics at Nanjing University. I am drawn to the beauty, rigor, and absolute logic of mathematics, and I am equally fascinated by the rapid development of artificial intelligence and machine learning. I hope to study AI through mathematics, using precise reasoning to understand the ideas behind modern learning systems. In both study and life, I value careful work, continuous refinement, and the pursuit of excellence.",
-    zh: "我是南京大学数学专业本科生。我热爱数学的美感、严谨与绝对逻辑，也对人工智能和机器学习的迅速发展感到震撼并充满憧憬。我希望继续学习 AI，并尝试用数学的语言和推理去理解现代学习系统背后的思想。在生活和学习中，我重视一丝不苟的态度、持续打磨的过程，以及对更高标准的追求。"
+    en: "I am an undergraduate student in mathematics at Nanjing University. I am drawn to the beauty, rigor, and absolute logic of mathematics, and I am equally fascinated by the rapid development of artificial intelligence and machine learning. I hope to continue studying artificial intelligence and use the language and rigorous reasoning of mathematics to study and explain it. In both study and life, I value careful work, continuous refinement, and the pursuit of excellence.",
+    zh: "我是南京大学数学专业本科生。我热爱数学的美感、严谨与绝对逻辑，也对人工智能和机器学习的迅速发展感到震撼并充满憧憬。我希望继续学习人工智能，并尝试用数学的语言与严谨推理研究和解释人工智能。在生活和学习中，我重视一丝不苟的态度、持续打磨的过程，以及对更高标准的追求。"
   },
   socials: [
     { label: "GitHub", url: "https://github.com/YoungDrifter" },
