@@ -1,0 +1,227 @@
+%% ================================================================
+%% cv.sty
+%% A restrained, English-language academic curriculum vitae style.
+%%
+%% Engine: XeLaTeX
+%% Usage:
+%%   \documentclass[11pt]{article}
+%%   \usepackage{cv}
+%%   \cvname{...}
+%%   \cvheadline{...}
+%%   \begin{document}
+%%   \makecvheader
+%%   \cvsection{Education}
+%%   \begin{cvproject}[URL]{dates}{title}{context} ... \end{cvproject}
+%%   ...
+%%   \end{document}
+%% ================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cv}[2026/08/22 v1.0 Classical academic CV]
+
+\RequirePackage{iftex}
+\RequireXeTeX
+
+%% Page and type
+\RequirePackage[
+  paper=a4paper,
+  top=1.5cm,
+  bottom=2.2cm,
+  left=2.2cm,
+  right=2.2cm,
+  headheight=14pt,
+  headsep=0.55cm,
+  footskip=1cm
+]{geometry}
+\RequirePackage{fontspec}
+\setmainfont{texgyrepagella-regular.otf}[
+  BoldFont=texgyrepagella-bold.otf,
+  ItalicFont=texgyrepagella-italic.otf,
+  BoldItalicFont=texgyrepagella-bolditalic.otf,
+  Ligatures=TeX]
+\RequirePackage{xeCJK}
+\setCJKmainfont{gbsn00lp.ttf}[
+  AutoFakeBold=2,
+  ItalicFont=gkai00mp.ttf,
+  BoldItalicFont=gkai00mp.ttf,
+  SmallCapsFont=gbsn00lp.ttf]
+\setCJKsansfont{gbsn00lp.ttf}[AutoFakeBold=2]
+\setCJKmonofont{gbsn00lp.ttf}
+\newCJKfontfamily\cv@sectioncjk{FandolHei-Regular.otf}[
+  BoldFont=FandolHei-Bold.otf,
+  SmallCapsFont=FandolHei-Regular.otf,
+  BoldFeatures={SmallCapsFont=FandolHei-Bold.otf}]
+\RequirePackage{microtype}
+
+%% Structure and links
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{enumitem}
+\RequirePackage{needspace}
+\RequirePackage{etoolbox}
+\RequirePackage{xparse}
+\RequirePackage{xurl}
+\RequirePackage{xcolor}
+\RequirePackage{fancyhdr}
+\RequirePackage[
+  pdfpagelabels=false,
+  unicode=true,
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=black,
+  citecolor=black
+]{hyperref}
+
+\definecolor{cvblack}{HTML}{111111}
+\color{cvblack}
+\urlstyle{same}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\linespread{1.035}\selectfont
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\raggedbottom
+
+%% Metadata
+\newcommand{\cv@name}{}
+\newcommand{\cv@headline}{}
+\newcommand{\cv@location}{}
+\newcommand{\cv@phone}{}
+\newcommand{\cv@phoneuri}{}
+\newcommand{\cv@email}{}
+\newcommand{\cv@websiteurl}{}
+\newcommand{\cv@websitedisplay}{}
+\newdimen\cv@savedvoffset
+
+\newcommand{\cvname}[1]{\gdef\cv@name{#1}}
+\newcommand{\cvheadline}[1]{\gdef\cv@headline{#1}}
+\newcommand{\cvlocation}[1]{\gdef\cv@location{#1}}
+\ExplSyntaxOn
+\NewDocumentCommand{\cvphone}{m}{
+  \gdef\cv@phone{#1}
+  \tl_set:Nn \l_tmpa_tl {#1}
+  \regex_replace_all:nnN { \s+ } {} \l_tmpa_tl
+  \xdef\cv@phoneuri{\tl_use:N \l_tmpa_tl}
+}
+\ExplSyntaxOff
+\newcommand{\cvemail}[1]{\gdef\cv@email{#1}}
+\NewDocumentCommand{\cvwebsite}{O{} m}{%
+  \gdef\cv@websiteurl{#2}%
+  \ifstrempty{#1}{\gdef\cv@websitedisplay{#2}}{\gdef\cv@websitedisplay{#1}}%
+}
+
+%% Running header: suppressed on the first page by \makecvheader.
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape \cv@name}
+\fancyhead[R]{\small\itshape Curriculum Vitae\enspace\textbar\enspace\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newif\ifcv@hascontact
+\newcommand{\cv@contactitem}[1]{%
+  \ifcv@hascontact
+    \nobreak\hspace{0.7em}\textperiodcentered\hspace{0.7em}%
+  \fi
+  #1\cv@hascontacttrue
+}
+
+\newcommand{\makecvheader}{%
+  \ifdefempty{\cv@name}{%
+    \PackageError{cv}{Missing \string\cvname}{Define \string\cvname\space before \string\makecvheader.}%
+  }{}%
+  \hypersetup{pdftitle={Curriculum Vitae -- \cv@name},pdfauthor={\cv@name}}%
+  \global\cv@savedvoffset=\voffset
+  \global\advance\voffset by -0.75cm
+  \AddToHookNext{shipout/after}{\global\voffset=\cv@savedvoffset}%
+  \thispagestyle{empty}%
+  \begin{center}
+    {\fontsize{24}{28}\selectfont\bfseries\addfontfeatures{LetterSpace=5}\cv@name\par}
+    \ifdefempty{\cv@headline}{}{%
+      \vspace{0.35em}{\large\itshape\cv@headline\par}%
+    }%
+    \vspace{0.7em}
+    {\footnotesize
+      \cv@hascontactfalse
+      \ifdefempty{\cv@location}{}{\cv@contactitem{\cv@location}}%
+      \ifdefempty{\cv@phone}{}{\cv@contactitem{\href{tel:\cv@phoneuri}{\cv@phone}}}%
+      \ifdefempty{\cv@email}{}{\cv@contactitem{\href{mailto:\cv@email}{\nolinkurl{\cv@email}}}}%
+      \ifdefempty{\cv@websiteurl}{}{\cv@contactitem{\href{\cv@websiteurl}{\cv@websitedisplay}}}%
+      \par
+    }
+  \end{center}
+  \vspace{0.45em}
+}
+
+%% Section heading
+\newcommand{\cvsection}[1]{%
+  \par\needspace{5\baselineskip}%
+  \vspace{0.9em}%
+  {\large\cv@sectioncjk\bfseries\scshape #1\par}%
+  \vspace{0.18em}%
+  \hrule height 0.45pt
+  \vspace{0.55em}%
+}
+
+%% Two-line academic entry with a fixed date column.
+\NewDocumentEnvironment{cventry}{m m m m}{%
+  \par\needspace{4.2\baselineskip}%
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3.15cm}@{}}
+    \textbf{#2} & \textbf{#1} \\
+    \textit{#3} & \ifstrempty{#4}{}{\textit{#4}}
+  \end{tabularx}%
+  \par\nobreak\vspace{0.18em}\ignorespaces
+}{%
+  \par\vspace{0.62em}%
+}
+
+%% Academic or technical project with an optional linked title.
+\NewDocumentEnvironment{cvproject}{O{} m m m}{%
+  \par\needspace{4.2\baselineskip}%
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3.15cm}@{}}
+    \ifstrempty{#1}{\textbf{#3}}{\href{#1}{\textbf{#3}}} & \textbf{#2} \\
+    \textit{#4} &
+  \end{tabularx}%
+  \par\nobreak\vspace{0.18em}\ignorespaces
+}{%
+  \par\vspace{0.62em}%
+}
+
+%% Compact bullets for achievements within an entry.
+\newenvironment{cvitems}{%
+  \begin{itemize}[
+    leftmargin=1.25em,
+    label=\raisebox{0.2ex}{\scriptsize\textbullet},
+    itemsep=0.16em,
+    topsep=0.18em,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+}{\end{itemize}}
+
+%% Publication entry. The title becomes a link when the optional URL is set.
+\NewDocumentCommand{\cvpublication}{O{} m m m m}{%
+  \par\needspace{2.8\baselineskip}%
+  \hangindent=1.25em\hangafter=1
+  #2.
+  \ifstrempty{#1}{``#3.''}{\href{#1}{``#3.''}}
+  \textit{#4}, #5.\par\vspace{0.42em}%
+}
+
+%% Labelled one-line or wrapping item.
+\newcommand{\cvitem}[2]{%
+  \par\needspace{2.5\baselineskip}%
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries\raggedright\arraybackslash}p{3.15cm}>{\raggedright\arraybackslash}X@{}}
+    #1 & #2
+  \end{tabularx}%
+  \par\vspace{0.32em}%
+}
+
+\AtBeginDocument{%
+  \hypersetup{pdfcreator={LaTeX with cv.sty}}%
+}
+
+\endinput

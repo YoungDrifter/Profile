@@ -55,6 +55,11 @@ const getBrandKey = (item: { url: string }) => {
       <span data-locale="en">{profile.study.en}</span>
       <span data-locale="zh">{profile.study.zh}</span>
     </div>
+    <div class="s-row s-description">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 1.5v2.25M12 20.25v2.25M1.5 12h2.25M20.25 12h2.25"/></svg>
+      <span data-locale="en">{profile.description.en}</span>
+      <span data-locale="zh">{profile.description.zh}</span>
+    </div>
     <a class="s-row" href={mailHref}>
       <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
       {profile.email}

@@ -1,0 +1,7 @@
+# XeLaTeX and latexmk intermediates
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.xdv
+*.synctex.gz

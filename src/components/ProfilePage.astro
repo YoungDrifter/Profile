@@ -1,10 +1,11 @@
 ---
 import Sidebar from "./Sidebar.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { competitions, education, honors, internships, profile, projects, publications } from "../data/profile";
+import { competitions, education, honors, internships, profile, projects, publications, technicalSkills } from "../data/profile";
 
 const navItems = [
   { href: "#about", en: "About", zh: "关于" },
+  { href: "#skills", en: "Skills", zh: "技能" },
   { href: "#education", en: "Education", zh: "教育" },
   { href: "#internships", en: "Internships", zh: "实习" },
   { href: "#projects", en: "Projects", zh: "项目" },
@@ -15,7 +16,7 @@ const navItems = [
 const localizePeriod = (period: string) => period.replace("Present", "现在");
 ---
 
-<BaseLayout title={profile.name} description={profile.intro.en}>
+<BaseLayout title={profile.name} description={profile.intro.en.join(" ")}>
   <div class="shell">
     <Sidebar />
 
@@ -70,10 +71,14 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
             <span data-locale="en">About</span>
             <span data-locale="zh">关于</span>
           </div>
-          <p class="about-p">
-            <span data-locale="en">{profile.intro.en}</span>
-            <span data-locale="zh">{profile.intro.zh}</span>
-          </p>
+          {
+            profile.intro.en.map((paragraph, index) => (
+              <p class="about-p">
+                <span data-locale="en">{paragraph}</span>
+                <span data-locale="zh">{profile.intro.zh[index]}</span>
+              </p>
+            ))
+          }
           <div class="tags">
             {
               profile.interests.map((interest) => (
@@ -84,6 +89,28 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
               ))
             }
           </div>
+        </section>
+
+        <section class="sec" id="skills">
+          <div class="sec-h">
+            <span data-locale="en">Technical Skills</span>
+            <span data-locale="zh">技术能力</span>
+          </div>
+          <dl class="skills-list">
+            {
+              technicalSkills.map((group) => (
+                <div class="skill-row">
+                  <dt class="skill-label">
+                    <span data-locale="en">{group.label.en}</span>
+                    <span data-locale="zh">{group.label.zh}</span>
+                  </dt>
+                  <dd class="skill-items">
+                    {group.items.map((item) => <span class="skill-item">{item}</span>)}
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
         </section>
 
         <section class="sec" id="education">
@@ -104,19 +131,31 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                       <span data-locale="en">{item.period}</span>
                       <span data-locale="zh">{localizePeriod(item.period)}</span>
                     </div>
-                    <div class="tl-title">
-                      <span data-locale="en">{item.title.en}</span>
-                      <span data-locale="zh">{item.title.zh}</span>
+                    <div class="tl-heading">
+                      <div class="tl-title">
+                        <span data-locale="en">{item.title.en}</span>
+                        <span data-locale="zh">{item.title.zh}</span>
+                      </div>
+                      <div class="tl-stage">
+                        <span data-locale="en">{item.subtitle.en}</span>
+                        <span data-locale="zh">{item.subtitle.zh}</span>
+                      </div>
                     </div>
-                    <div class="tl-inst">
-                      <span data-locale="en">{item.subtitle.en}</span>
-                      <span data-locale="zh">{item.subtitle.zh}</span>
-                    </div>
-                    {item.description.en && (
+                    {item.description && (
                       <div class="tl-desc">
                         <span data-locale="en">{item.description.en}</span>
                         <span data-locale="zh">{item.description.zh}</span>
                       </div>
+                    )}
+                    {item.descriptionItems && (
+                      <ul class="tl-description-list">
+                        {item.descriptionItems.map((description) => (
+                          <li class="tl-description-item">
+                            <span data-locale="en">{description.en}</span>
+                            <span data-locale="zh">{description.zh}</span>
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </div>
                 </div>
@@ -143,18 +182,32 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                       <span data-locale="en">{item.period}</span>
                       <span data-locale="zh">{localizePeriod(item.period)}</span>
                     </div>
-                    <div class="tl-title">
-                      <span data-locale="en">{item.title.en}</span>
-                      <span data-locale="zh">{item.title.zh}</span>
+                    <div class="tl-heading">
+                      <div class="tl-title">
+                        <span data-locale="en">{item.title.en}</span>
+                        <span data-locale="zh">{item.title.zh}</span>
+                      </div>
+                      <div class="tl-stage">
+                        <span data-locale="en">{item.subtitle.en}</span>
+                        <span data-locale="zh">{item.subtitle.zh}</span>
+                      </div>
                     </div>
-                    <div class="tl-inst">
-                      <span data-locale="en">{item.subtitle.en}</span>
-                      <span data-locale="zh">{item.subtitle.zh}</span>
-                    </div>
-                    <div class="tl-desc">
-                      <span data-locale="en">{item.description.en}</span>
-                      <span data-locale="zh">{item.description.zh}</span>
-                    </div>
+                    {item.description && (
+                      <div class="tl-desc">
+                        <span data-locale="en">{item.description.en}</span>
+                        <span data-locale="zh">{item.description.zh}</span>
+                      </div>
+                    )}
+                    {item.descriptionItems && (
+                      <ul class="tl-description-list">
+                        {item.descriptionItems.map((description) => (
+                          <li class="tl-description-item">
+                            <span data-locale="en">{description.en}</span>
+                            <span data-locale="zh">{description.zh}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               ))
@@ -169,10 +222,17 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
           </div>
           {
             projects.map((project) => (
-              <div class="pub-card">
-                <div class="pub-title">
-                  <span data-locale="en">{project.title.en}</span>
-                  <span data-locale="zh">{project.title.zh}</span>
+              <div class="pub-card project-card">
+                <div class="project-header">
+                  <div class="pub-title">
+                    <span data-locale="en">{project.title.en}</span>
+                    <span data-locale="zh">{project.title.zh}</span>
+                  </div>
+                  <div class="project-status">
+                    <span class="project-status-dot" aria-hidden="true"></span>
+                    <span data-locale="en">{project.status.en}</span>
+                    <span data-locale="zh">{project.status.zh}</span>
+                  </div>
                 </div>
                 <div class="pub-meta">
                   <span data-locale="en">{project.role.en}</span>
@@ -181,45 +241,29 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   <span data-locale="en">{project.period}</span>
                   <span data-locale="zh">{localizePeriod(project.period)}</span>
                 </div>
-                <p class="pub-summary">
-                  <span data-locale="en">{project.summary.en}</span>
-                  <span data-locale="zh">{project.summary.zh}</span>
+                <div class="content-tags" aria-label="Technologies">
+                  {project.technologies.map((technology) => <span class="content-tag">{technology}</span>)}
+                </div>
+                <p class="pub-summary project-description">
+                  <span data-locale="en">{project.description.en}</span>
+                  <span data-locale="zh">{project.description.zh}</span>
                 </p>
                 <div class="pub-actions">
-                  {
-                    project.pdf ? (
-                      <a class="pub-action" href={project.pdf} target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                        PDF
-                      </a>
-                    ) : (
-                      <button class="pub-action is-unavailable" type="button" aria-disabled="true" aria-label="PDF unavailable / 暂无 PDF" data-tooltip-en="This project has no PDF yet" data-tooltip-zh="该项目暂无 PDF">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                        <span data-locale="en">PDF · Unavailable</span>
-                        <span data-locale="zh">PDF · 暂无</span>
-                      </button>
-                    )}
                   {
                     project.code ? (
                       <a class="pub-action" href={project.code} target="_blank" rel="noopener noreferrer">
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                           <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Code
+                        <span>Repository</span>
                       </a>
                     ) : (
                       <button class="pub-action is-unavailable" type="button" aria-disabled="true" aria-label="Code unavailable / 暂无代码" data-tooltip-en="This project has no code yet" data-tooltip-zh="该项目暂无代码">
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                           <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span data-locale="en">Code · Unavailable</span>
-                        <span data-locale="zh">Code · 暂无</span>
+                        <span data-locale="en">Repository · Unavailable</span>
+                        <span data-locale="zh">Repository · 暂无</span>
                       </button>
                     )}
                 </div>
@@ -248,6 +292,16 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   <span> · </span>
                   {publication.year}
                 </div>
+                {publication.tags && (
+                  <div class="content-tags">
+                    {publication.tags.map((tag) => (
+                      <span class="content-tag">
+                        <span data-locale="en">{tag.en}</span>
+                        <span data-locale="zh">{tag.zh}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <p class="pub-summary">
                   <span data-locale="en">{publication.summary.en}</span>
                   <span data-locale="zh">{publication.summary.zh}</span>
