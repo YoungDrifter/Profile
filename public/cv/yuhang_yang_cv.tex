@@ -1,0 +1,59 @@
+% !TeX program = xelatex
+% ====================================================================
+% yuhang_yang_cv.tex -- Bilingual academic CV for Yuhang Yang
+% Compile: latexmk -xelatex -gg -interaction=nonstopmode -halt-on-error yuhang_yang_cv.tex
+% ====================================================================
+\documentclass[11pt]{article}
+
+\usepackage{cv}
+
+\cvname{阳宇航}
+\cvheadline{Undergraduate in Information and Computational Science · Nanjing University}
+\cvphone{(+86) 193 5846 6910}
+\cvlocation{Nanjing, China}
+\cvemail{yuhangyang@smail.nju.edu.cn}
+\cvwebsite[yuhangyang.site]{https://yuhangyang.site}
+
+\begin{document}
+
+\makecvheader
+
+\cvsection{Research Interests}
+
+主要关注 Optimization Theory、Natural Language Processing（NLP）与 Large Language Models（LLMs），希望将计算数学基础与模型实践结合起来，理解相关方法的理论依据、实现方式及其在实际训练中的表现。
+
+\cvsection{Education}
+
+\begin{cventry}{2024--2028（预计）}{B.Sc. in Information and Computational Science}{南京大学数学学院}{Nanjing, China}
+学位学分绩：\textbf{4.45/5.0}；专业排名：\textbf{1/15}。
+\begin{cvitems}
+  \item Core Coursework：数学分析（85）、高等代数（92）、解析几何（99）、数值分析（91）、离散数学（95）。
+  \item English Proficiency：CET-4 627；CET-6 508。
+\end{cvitems}
+\end{cventry}
+
+\cvsection{Projects}
+
+\begin{cvproject}[https://github.com/YoungDrifter/min-GPT]{2026.08}{min-GPT: A Handwritten Conversational GPT}{Independent Project · PyTorch · GPT-2 · DailyDialog · W\&B}
+\begin{cvitems}
+  \item 使用 PyTorch 手写 GPT-2 byte-level BPE tokenizer、Causal Self-Attention、MLP 与 Pre-LN Decoder-only Transformer，并导入 DialoGPT-small 预训练权重。
+  \item 在 DailyDialog 上采用 reply-only loss 进行 full-parameter fine-tuning；Full-test perplexity 由 \textbf{42.34} 降至 \textbf{14.28}。
+\end{cvitems}
+\end{cvproject}
+
+\cvsection{Technical Skills}
+
+\cvitem{Languages}{Python、C++}
+\cvitem{Frameworks}{PyTorch}
+\cvitem{Tools}{\LaTeX、Git、Weights \& Biases（W\&B）}
+
+\cvsection{Competitions}
+
+\cvitem{2025}{\textbf{Second Prize} · 全国大学生数学竞赛（江苏赛区）}
+\cvitem{2025}{\textbf{Third Prize} · 全国大学生数学建模竞赛（江苏赛区）}
+
+\cvsection{Honors}
+
+\cvitem{2025}{南京大学人民奖学金\textbf{二等奖}（专业前 20\%）}
+
+\end{document}

@@ -28,6 +28,7 @@ export type Project = {
   title: Localized;
   description: Localized;
   technologies: string[];
+  pdf?: string;
   code?: string;
 };
 
@@ -70,7 +71,7 @@ export const profile = {
   },
   email: "yuhangyang@smail.nju.edu.cn",
   avatar: "/images/avatar.png",
-  cv: "/files/cv.pdf",
+  cv: "/cv/yuhang_yang_cv.pdf",
   motto: {
     en: "Search the World and Find Myself",
     zh: "看世界也找自己"
@@ -152,7 +153,7 @@ export const technicalSkills: SkillGroup[] = [
   },
   {
     label: { en: "Tools", zh: "工具" },
-    items: ["Git", "LaTeX", "Weights & Biases (W&B)"]
+    items: ["LaTeX", "Git", "Weights & Biases (W&B)"]
   }
 ];
 
@@ -215,7 +216,30 @@ export const competitions: RecognitionItem[] = [
   }
 ];
 
-export const projects: Project[] = [];
+export const projects: Project[] = [
+  {
+    period: "2026.08",
+    status: {
+      en: "Completed",
+      zh: "已完成"
+    },
+    role: {
+      en: "Independent Project",
+      zh: "个人项目"
+    },
+    title: {
+      en: "min-GPT: A Handwritten Conversational GPT",
+      zh: "min-GPT：手写对话式 GPT"
+    },
+    description: {
+      en: "Implemented and fine-tuned a GPT-2-compatible conversational language model from core components. Full-test perplexity decreased from 42.34 to 14.28 after fine-tuning.",
+      zh: "从核心组件出发，实现并微调了兼容 GPT-2 的对话语言模型；微调后 Full-test perplexity 从 42.34 降至 14.28。"
+    },
+    technologies: ["PyTorch", "GPT-2", "DailyDialog", "W&B"],
+    pdf: "/files/min_gpt.pdf",
+    code: "https://github.com/YoungDrifter/min-GPT"
+  }
+];
 
 export const publications: Publication[] = [
   {
