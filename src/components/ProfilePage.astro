@@ -223,16 +223,19 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
           {
             projects.map((project) => (
               <div class="pub-card project-card">
-                <div class="project-header">
+                <div class="card-header project-header">
                   <div class="pub-title">
                     <span data-locale="en">{project.title.en}</span>
                     <span data-locale="zh">{project.title.zh}</span>
                   </div>
-                  <div class="project-status">
-                    <span class="project-status-dot" aria-hidden="true"></span>
-                    <span data-locale="en">{project.status.en}</span>
-                    <span data-locale="zh">{project.status.zh}</span>
-                  </div>
+                  {project.repository && (
+                    <a class="pub-action card-resource-action project-repository-link" href={project.repository} target="_blank" rel="noopener noreferrer">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <span>Repository</span>
+                    </a>
+                  )}
                 </div>
                 <div class="pub-meta">
                   <span data-locale="en">{project.role.en}</span>
@@ -248,44 +251,6 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   <span data-locale="en">{project.description.en}</span>
                   <span data-locale="zh">{project.description.zh}</span>
                 </p>
-                <div class="pub-actions">
-                  {
-                    project.pdf ? (
-                      <a class="pub-action" href={project.pdf} target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                        <span>Report</span>
-                      </a>
-                    ) : (
-                      <button class="pub-action is-unavailable" type="button" aria-disabled="true" aria-label="Report unavailable / 暂无报告" data-tooltip-en="This project has no report yet" data-tooltip-zh="该项目暂无报告">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                        <span data-locale="en">Report · Unavailable</span>
-                        <span data-locale="zh">Report · 暂无</span>
-                      </button>
-                    )}
-                  {
-                    project.code ? (
-                      <a class="pub-action" href={project.code} target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Repository</span>
-                      </a>
-                    ) : (
-                      <button class="pub-action is-unavailable" type="button" aria-disabled="true" aria-label="Code unavailable / 暂无代码" data-tooltip-en="This project has no code yet" data-tooltip-zh="该项目暂无代码">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span data-locale="en">Repository · Unavailable</span>
-                        <span data-locale="zh">Repository · 暂无</span>
-                      </button>
-                    )}
-                </div>
               </div>
             ))
           }
@@ -299,9 +264,31 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
           {
             publications.map((publication) => (
               <div class="pub-card">
-                <div class="pub-title">
-                  <span data-locale="en">{publication.title.en}</span>
-                  <span data-locale="zh">{publication.title.zh}</span>
+                <div class="card-header publication-header">
+                  <div class="pub-title">
+                    <span data-locale="en">{publication.title.en}</span>
+                    <span data-locale="zh">{publication.title.zh}</span>
+                  </div>
+                  {
+                    publication.pdf ? (
+                      <a class="pub-action card-resource-action publication-pdf-link" href={publication.pdf} target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        <span>PDF</span>
+                      </a>
+                    ) : (
+                      <span class="pub-action card-resource-action publication-pdf-link is-unavailable" aria-disabled="true" aria-label="PDF unavailable / 暂无 PDF" data-tooltip-en="This publication has no PDF yet" data-tooltip-zh="该论文暂无 PDF">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        <span data-locale="en">PDF · Unavailable</span>
+                        <span data-locale="zh">PDF · 暂无</span>
+                      </span>
+                    )
+                  }
                 </div>
                 <div class="pub-meta">
                   {publication.authors}
@@ -325,44 +312,6 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   <span data-locale="en">{publication.summary.en}</span>
                   <span data-locale="zh">{publication.summary.zh}</span>
                 </p>
-                <div class="pub-actions">
-                  {
-                    publication.pdf ? (
-                      <a class="pub-action" href={publication.pdf} target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                        PDF
-                      </a>
-                    ) : (
-                      <button class="pub-action is-unavailable" type="button" aria-disabled="true" aria-label="PDF unavailable / 暂无 PDF" data-tooltip-en="This publication has no PDF yet" data-tooltip-zh="该论文暂无 PDF">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                          <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                        <span data-locale="en">PDF · Unavailable</span>
-                        <span data-locale="zh">PDF · 暂无</span>
-                      </button>
-                    )}
-                  {
-                    publication.code ? (
-                      <a class="pub-action" href={publication.code} target="_blank" rel="noopener noreferrer">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Code
-                      </a>
-                    ) : (
-                      <button class="pub-action is-unavailable" type="button" aria-disabled="true" aria-label="Code unavailable / 暂无代码" data-tooltip-en="This publication has no code yet" data-tooltip-zh="该论文暂无代码">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span data-locale="en">Code · Unavailable</span>
-                        <span data-locale="zh">Code · 暂无</span>
-                      </button>
-                    )}
-                </div>
               </div>
             ))
           }

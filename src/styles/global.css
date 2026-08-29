@@ -676,35 +676,11 @@ svg {
   line-height: 1.78;
 }
 
-.project-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.project-status {
-  display: inline-flex;
+.card-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  flex-shrink: 0;
-  gap: 6px;
-  margin-top: 1px;
-  padding: 3px 8px;
-  border: 1px solid #cbd6df;
-  border-radius: 100px;
-  color: var(--accent);
-  font-size: 9.8px;
-  font-weight: 500;
-  letter-spacing: 0.045em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-
-.project-status-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent-h);
+  gap: 1rem;
 }
 
 .project-description {
@@ -753,6 +729,12 @@ svg {
   letter-spacing: 0.035em;
   line-height: 1.35;
   transition: border-color 0.16s, background 0.16s, color 0.16s;
+}
+
+.card-resource-action {
+  flex-shrink: 0;
+  margin-top: 0;
+  white-space: nowrap;
 }
 
 .pub-action:hover {
@@ -1151,13 +1133,8 @@ html[data-lang="zh"] .pub-action.is-unavailable::after {
     gap: 0 12px;
   }
 
-  .project-header {
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .project-status {
-    order: -1;
+  .card-header {
+    gap: 0.75rem;
   }
 
   .award-item {

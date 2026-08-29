@@ -23,13 +23,11 @@ export type RecognitionItem = {
 
 export type Project = {
   period: string;
-  status: Localized;
   role: Localized;
   title: Localized;
   description: Localized;
   technologies: string[];
-  pdf?: string;
-  code?: string;
+  repository?: string;
 };
 
 export type Publication = {
@@ -40,7 +38,6 @@ export type Publication = {
   summary: Localized;
   tags?: Localized[];
   pdf?: string;
-  code?: string;
 };
 
 export const profile = {
@@ -219,10 +216,6 @@ export const competitions: RecognitionItem[] = [
 export const projects: Project[] = [
   {
     period: "2026.08",
-    status: {
-      en: "Completed",
-      zh: "已完成"
-    },
     role: {
       en: "Independent Project",
       zh: "个人项目"
@@ -236,8 +229,7 @@ export const projects: Project[] = [
       zh: "从核心组件出发，实现并微调了兼容 GPT-2 的对话语言模型；微调后 Full-test perplexity 从 42.34 降至 14.28。"
     },
     technologies: ["PyTorch", "GPT-2", "DailyDialog", "W&B"],
-    pdf: "/files/min_gpt.pdf",
-    code: "https://github.com/YoungDrifter/min-GPT"
+    repository: "https://github.com/YoungDrifter/min-GPT"
   }
 ];
 
