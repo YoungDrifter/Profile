@@ -36,7 +36,6 @@ export type Publication = {
   title: Localized;
   authors: string;
   pdf?: string;
-  code?: string;
 };
 
 export const profile = {

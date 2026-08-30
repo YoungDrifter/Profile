@@ -2,28 +2,29 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("publication card renders metadata, then left-to-right PDF and Codes actions without topics or description", async () => {
+test("publication timeline renders venue/date, title with PDF link, then authors", async () => {
   const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
   const publicationsStart = html.indexOf('id="publications"');
   const publicationsEnd = html.indexOf('id="competitions"', publicationsStart);
   const publications = html.slice(publicationsStart, publicationsEnd);
 
-  const title = publications.indexOf('class="pub-title publication-title"');
+  const timeline = publications.indexOf('class="tl publication-timeline"');
+  const row = publications.indexOf('class="tl-row publication-row"');
+  const venueAndDate = publications.indexOf('class="publication-period-venue"');
+  const heading = publications.indexOf('class="publication-heading"');
+  const title = publications.indexOf('class="publication-title"');
+  const pdfAction = publications.indexOf('class="publication-pdf-link');
   const authors = publications.indexOf('class="publication-authors"');
-  const venueAndDate = publications.indexOf('class="pub-meta publication-venue-date"');
-  const actions = publications.indexOf('class="publication-actions"');
-  const pdfAction = publications.indexOf('class="pub-action card-resource-action publication-pdf-link');
-  const codesAction = publications.indexOf('class="pub-action card-resource-action publication-codes-link');
 
   assert.ok(publicationsStart >= 0 && publicationsEnd > publicationsStart, "publication section should render");
-  assert.ok(title >= 0, "publication title should have its own row");
-  assert.ok(authors > title, "authors should render on the row after the title");
-  assert.ok(venueAndDate > authors, "venue/date should render on the row after authors");
-  assert.ok(actions > venueAndDate, "resource actions should have their own final row");
-  assert.ok(pdfAction > actions, "PDF should be the first action on the final row");
-  assert.ok(codesAction > pdfAction, "Codes should follow PDF from left to right");
+  assert.ok(timeline >= 0 && row > timeline, "publications should render as a timeline");
+  assert.ok(venueAndDate > row, "date and venue should render on the first content row");
+  assert.ok(heading > venueAndDate, "title and PDF should render on the second content row");
+  assert.ok(title > heading && pdfAction > title, "PDF should follow the title in the heading row");
+  assert.ok(authors > pdfAction, "authors should render on the third content row");
   assert.equal(publications.includes("PDF · Unavailable"), false, "unavailable PDF label should stay compact on narrow screens");
-  assert.equal(publications.includes("Codes · Unavailable"), false, "unavailable Codes label should stay compact on narrow screens");
+  assert.equal(publications.includes("publication-codes-link"), false, "publication code actions should not render");
+  assert.equal(publications.includes('class="pub-card publication-card"'), false, "publications should not render as cards");
   assert.equal(publications.includes('class="content-tags"'), false, "publication topics should not render");
   assert.equal(publications.includes('class="pub-summary"'), false, "publication description should not render");
 });
