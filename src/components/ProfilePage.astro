@@ -1,6 +1,7 @@
 ---
 import Sidebar from "./Sidebar.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siGithub } from "simple-icons";
 import { competitions, education, honors, internships, profile, projects, publications, technicalSkills } from "../data/profile";
 
 const navItems = [
@@ -230,8 +231,8 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                   </div>
                   {project.repository && (
                     <a class="pub-action card-resource-action project-repository-link" href={project.repository} target="_blank" rel="noopener noreferrer">
-                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <svg class="repository-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d={siGithub.path} />
                       </svg>
                       <span>Repository</span>
                     </a>
@@ -263,12 +264,19 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
           </div>
           {
             publications.map((publication) => (
-              <div class="pub-card">
-                <div class="card-header publication-header">
-                  <div class="pub-title">
-                    <span data-locale="en">{publication.title.en}</span>
-                    <span data-locale="zh">{publication.title.zh}</span>
-                  </div>
+              <div class="pub-card publication-card">
+                <div class="pub-title publication-title">
+                  <span data-locale="en">{publication.title.en}</span>
+                  <span data-locale="zh">{publication.title.zh}</span>
+                </div>
+                <div class="publication-authors">{publication.authors}</div>
+                <div class="pub-meta publication-venue-date">
+                  <span data-locale="en">{publication.venue.en}</span>
+                  <span data-locale="zh">{publication.venue.zh}</span>
+                  <span> · </span>
+                  {publication.year}
+                </div>
+                <div class="publication-actions">
                   {
                     publication.pdf ? (
                       <a class="pub-action card-resource-action publication-pdf-link" href={publication.pdf} target="_blank" rel="noopener noreferrer">
@@ -284,34 +292,28 @@ const localizePeriod = (period: string) => period.replace("Present", "现在");
                           <path d="M6.75 3.75h7.5l3 3v13.5h-10.5V3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
                           <path d="M14.25 3.75v3h3M9.25 15.5h5.5M9.25 12.5h5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         </svg>
-                        <span data-locale="en">PDF · Unavailable</span>
-                        <span data-locale="zh">PDF · 暂无</span>
+                        <span>PDF</span>
+                      </span>
+                    )
+                  }
+                  {
+                    publication.code ? (
+                      <a class="pub-action card-resource-action publication-codes-link" href={publication.code} target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Codes</span>
+                      </a>
+                    ) : (
+                      <span class="pub-action card-resource-action publication-codes-link is-unavailable" aria-disabled="true" aria-label="Codes unavailable / 暂无代码" data-tooltip-en="This publication has no code yet" data-tooltip-zh="该论文暂无代码">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="m8.25 8.25-3.75 3.75 3.75 3.75M15.75 8.25l3.75 3.75-3.75 3.75M13.5 5.25l-3 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Codes</span>
                       </span>
                     )
                   }
                 </div>
-                <div class="pub-meta">
-                  {publication.authors}
-                  <span> · </span>
-                  <span data-locale="en">{publication.venue.en}</span>
-                  <span data-locale="zh">{publication.venue.zh}</span>
-                  <span> · </span>
-                  {publication.year}
-                </div>
-                {publication.tags && (
-                  <div class="content-tags">
-                    {publication.tags.map((tag) => (
-                      <span class="content-tag">
-                        <span data-locale="en">{tag.en}</span>
-                        <span data-locale="zh">{tag.zh}</span>
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <p class="pub-summary">
-                  <span data-locale="en">{publication.summary.en}</span>
-                  <span data-locale="zh">{publication.summary.zh}</span>
-                </p>
               </div>
             ))
           }

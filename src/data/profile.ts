@@ -35,9 +35,8 @@ export type Publication = {
   venue: Localized;
   title: Localized;
   authors: string;
-  summary: Localized;
-  tags?: Localized[];
   pdf?: string;
+  code?: string;
 };
 
 export const profile = {
@@ -67,7 +66,7 @@ export const profile = {
     zh: "专注数学与 AI 理解"
   },
   email: "yuhangyang@smail.nju.edu.cn",
-  avatar: "/images/avatar.png",
+  avatar: "/avatar.png",
   cv: "/cv/yuhang_yang_cv.pdf",
   motto: {
     en: "Search the World and Find Myself",
@@ -244,11 +243,6 @@ export const publications: Publication[] = [
       en: "Publication Placeholder",
       zh: "论文占位"
     },
-    authors: "Yuhang Yang",
-    summary: {
-      en: "A reserved space for future research writing or formal publications.",
-      zh: "这里暂时作为未来研究写作或正式论文的占位。"
-    },
-    tags: [{ en: "To be updated", zh: "待补充" }]
+    authors: "Yuhang Yang"
   }
 ];
