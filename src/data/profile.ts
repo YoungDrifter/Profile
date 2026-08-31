@@ -116,17 +116,17 @@ export const education: TimelineItem[] = [
       zh: "南京大学"
     },
     subtitle: {
-      en: "Undergraduate",
-      zh: "本科生"
+      en: "B.Sc. in Computational Mathematics",
+      zh: "计算数学专业理学学士"
     },
     descriptionItems: [
-      {
-        en: "Studying computational mathematics and building on this foundation to explore the theory and practice of AI in greater depth.",
-        zh: "系统学习计算数学相关课程，并在此基础上深入开展对 AI 理论与实践的学习。"
+       {
+        en: "GPA 4.45/5.0 · Rank 1/15",
+        zh: "GPA 4.45/5.0 · 专业排名 1/15"
       },
       {
-        en: "Degree GPA 4.45/5.0 · Rank 1/15",
-        zh: "学位学分绩 4.45/5.0 · 专业排名 1/15"
+        en: "Studying computational mathematics and, building on this foundation, exploring the theory and practice of large language models and deep learning.",
+        zh: "系统学习计算数学相关课程，并在此基础上深入探索大语言模型与深度学习等 AI 领域的理论与实践。"
       }
     ]
   },
@@ -137,8 +137,8 @@ export const education: TimelineItem[] = [
       zh: "衡阳市第八中学"
     },
     subtitle: {
-      en: "High School Student",
-      zh: "高中生"
+      en: "High School Graduate",
+      zh: "高中毕业生"
     },
     descriptionItems: [
       {

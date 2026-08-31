@@ -137,35 +137,37 @@ const getPersonalIcon = (label: string) => label === "X" ? siX : siXiaohongshu;
                     {index < education.length - 1 && <div class="spine-line"></div>}
                   </div>
                   <div class="tl-card">
-                    <div class="tl-period">
-                      <span data-locale="en">{item.period}</span>
-                      <span data-locale="zh">{localizePeriod(item.period)}</span>
-                    </div>
-                    <div class="tl-heading">
-                      <div class="tl-title">
+                    <div class="edu-row">
+                      <div class="edu-school">
                         <span data-locale="en">{item.title.en}</span>
                         <span data-locale="zh">{item.title.zh}</span>
                       </div>
-                      <div class="tl-stage">
-                        <span data-locale="en">{item.subtitle.en}</span>
-                        <span data-locale="zh">{item.subtitle.zh}</span>
+                      <div class="edu-period">
+                        <span data-locale="en">{item.period}</span>
+                        <span data-locale="zh">{localizePeriod(item.period)}</span>
                       </div>
                     </div>
+                    <div class="edu-degree">
+                      <span data-locale="en">{item.subtitle.en}</span>
+                      <span data-locale="zh">{item.subtitle.zh}</span>
+                    </div>
                     {item.description && (
-                      <div class="tl-desc">
-                        <span data-locale="en">{item.description.en}</span>
-                        <span data-locale="zh">{item.description.zh}</span>
+                      <div class="edu-desc">
+                        <p class="edu-desc-line">
+                          <span data-locale="en">{item.description.en}</span>
+                          <span data-locale="zh">{item.description.zh}</span>
+                        </p>
                       </div>
                     )}
                     {item.descriptionItems && (
-                      <ul class="tl-description-list">
+                      <div class="edu-desc">
                         {item.descriptionItems.map((description) => (
-                          <li class="tl-description-item">
+                          <p class="edu-desc-line">
                             <span data-locale="en">{description.en}</span>
                             <span data-locale="zh">{description.zh}</span>
-                          </li>
+                          </p>
                         ))}
-                      </ul>
+                      </div>
                     )}
                   </div>
                 </div>

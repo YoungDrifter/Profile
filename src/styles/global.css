@@ -677,6 +677,57 @@ svg {
   font-size: 9px;
 }
 
+.edu-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 820px;
+}
+
+.edu-school {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.edu-period {
+  flex-shrink: 0;
+  color: var(--ink-3);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
+  line-height: 1.45;
+}
+
+.edu-degree {
+  max-width: 820px;
+  margin-top: 2px;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+.edu-desc {
+  max-width: 820px;
+  margin-top: 0.55rem;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+.edu-desc-line {
+  margin: 0;
+}
+
+.edu-desc-line + .edu-desc-line {
+  margin-top: 0.25rem;
+}
+
 .publication-list {
   display: grid;
   gap: 1rem;
@@ -1151,6 +1202,7 @@ svg {
   }
 
   .tl-heading,
+  .edu-row,
   .publication-heading {
     gap: 0.7rem;
   }
