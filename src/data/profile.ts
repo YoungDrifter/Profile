@@ -21,21 +21,23 @@ export type RecognitionItem = {
   subtitle: Localized;
 };
 
-export type Project = {
-  period: string;
-  role: Localized;
-  title: Localized;
-  description: Localized;
-  technologies: string[];
-  repository?: string;
-};
-
 export type Publication = {
   year: string;
   venue: Localized;
   title: Localized;
-  authors: string;
+  authors: string[];
   pdf?: string;
+  code?: string;
+};
+
+export type SocialLink = {
+  label: string;
+  url: string;
+};
+
+export type PersonalSection = {
+  life: Localized;
+  collaboration: Localized;
 };
 
 export const profile = {
@@ -55,10 +57,6 @@ export const profile = {
   location: {
     en: "Nanjing, China",
     zh: "中国 · 南京"
-  },
-  study: {
-    en: "Information and Computing Science · Expected 2028",
-    zh: "信息与计算科学 · 预计 2028 年毕业"
   },
   description: {
     en: "Focused on understanding mathematics and AI",
@@ -83,11 +81,9 @@ export const profile = {
       "我在学习与研究中注重严谨与精确，具有较强的主观能动性，并对值得深入的问题保持持续的探索兴趣。"
     ]
   },
-  socials: [
+  primarySocials: [
     { label: "GitHub", url: "https://github.com/YoungDrifter" },
-    { label: "X", url: "https://x.com/Yuhangar" },
-    { label: "Zhihu", url: "https://www.zhihu.com/people/emrysyang" },
-    { label: "Xiaohongshu", url: "https://www.xiaohongshu.com/user/profile/6a0dd2930000000001007000" }
+    { label: "Zhihu", url: "https://www.zhihu.com/people/emrysyang" }
   ],
   interests: [
     { en: "Optimization Theory", zh: "优化理论" },
@@ -95,6 +91,22 @@ export const profile = {
     { en: "LLMs", zh: "大语言模型" }
   ]
 };
+
+export const personal: PersonalSection = {
+  life: {
+    en: "Outside academics, I enjoy documenting what I learn and experience, exploring new ideas, and staying attentive to everyday life. I value curiosity, clarity, and the freedom to keep discovering both the world and myself.",
+    zh: "学习之外，我喜欢记录学习与生活、接触新的想法，并在日常经验中保持观察和思考。我珍视好奇、清晰与持续探索的自由，也希望在认识世界的过程中更好地认识自己。"
+  },
+  collaboration: {
+    en: "I am open to conversations and collaborations around mathematics, deep learning, large language models, open-source learning projects, and other thoughtful ideas. If our interests overlap, feel free to reach out by email.",
+    zh: "我期待围绕数学、深度学习、大语言模型、开源学习项目，以及其他值得认真讨论的想法展开交流与合作。如果我们的兴趣有所交集，欢迎通过邮件联系我。"
+  }
+};
+
+export const personalLinks: SocialLink[] = [
+  { label: "X", url: "https://x.com/Yuhangar" },
+  { label: "Xiaohongshu", url: "https://www.xiaohongshu.com/user/profile/6a0dd2930000000001007000" }
+];
 
 export const education: TimelineItem[] = [
   {
@@ -211,26 +223,6 @@ export const competitions: RecognitionItem[] = [
   }
 ];
 
-export const projects: Project[] = [
-  {
-    period: "2026.08",
-    role: {
-      en: "Independent Project",
-      zh: "个人项目"
-    },
-    title: {
-      en: "min-GPT: A Handwritten Conversational GPT",
-      zh: "min-GPT：手写对话式 GPT"
-    },
-    description: {
-      en: "Implemented and fine-tuned a GPT-2-compatible conversational language model from core components. Full-test perplexity decreased from 42.34 to 14.28 after fine-tuning.",
-      zh: "从核心组件出发，实现并微调了兼容 GPT-2 的对话语言模型；微调后 Full-test perplexity 从 42.34 降至 14.28。"
-    },
-    technologies: ["PyTorch", "GPT-2", "DailyDialog", "W&B"],
-    repository: "https://github.com/YoungDrifter/min-GPT"
-  }
-];
-
 export const publications: Publication[] = [
   {
     year: "2026",
@@ -242,6 +234,6 @@ export const publications: Publication[] = [
       en: "Publication Placeholder",
       zh: "论文占位"
     },
-    authors: "Yuhang Yang"
+    authors: ["Minghao Chen", "Yuhang Yang", "Zihan Liu"]
   }
 ];

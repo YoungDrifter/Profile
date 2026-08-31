@@ -5,8 +5,8 @@
 ## 特性
 
 - 中英双语内容与一键切换，语言偏好保存在 `localStorage`
-- 完整学术履历展示：关于、技术能力、教育、实习、项目、论文、竞赛、荣誉
-- 响应式布局，桌面端与移动端均有区块导航
+- 完整学术履历展示：关于、技术能力、教育、实习、论文、竞赛、荣誉与个人介绍
+- 响应式布局：桌面双栏独立滚动，窄屏使用个人资料抽屉与区块导航
 - 自动生成 sitemap 与 SEO 元信息
 - 简历以 XeLaTeX 源码维护，随项目一起版本化管理
 
@@ -39,8 +39,7 @@ npm run check   # Astro / TypeScript 类型检查
 ├── .github/workflows/   # GitHub Pages 自动部署流程
 ├── public/
 │   ├── cv/              # 简历 XeLaTeX 源码与编译产物
-│   ├── files/           # 可下载文件（如项目报告）
-│   ├── images/          # 图片资源（头像等）
+│   ├── avatar.png       # 主页头像
 │   ├── CNAME            # 自定义域名配置
 │   └── favicon.svg
 ├── src/
@@ -55,15 +54,16 @@ npm run check   # Astro / TypeScript 类型检查
 
 ## 内容维护
 
-网站的正文内容（个人信息、教育经历、项目、论文等）全部维护在 `src/data/profile.ts`，文案以 `{ en, zh }` 双语结构存放。
+网站的正文内容（个人信息、教育经历、论文、个人介绍等）全部维护在 `src/data/profile.ts`，文案以 `{ en, zh }` 双语结构存放。
 
 | 想修改的内容 | 修改位置 |
 | --- | --- |
-| 姓名、邮箱、头像、CV、社交链接、About 文案、兴趣标签 | `src/data/profile.ts` 的 `profile` |
+| 姓名、邮箱、头像、CV、主要社交链接、About 文案、兴趣标签 | `src/data/profile.ts` 的 `profile` |
 | 教育 / 实习经历 | `src/data/profile.ts` 的 `education` / `internships` |
 | 技术能力 | `src/data/profile.ts` 的 `technicalSkills` |
-| 项目 / 论文 | `src/data/profile.ts` 的 `projects` / `publications` |
+| 论文 | `src/data/profile.ts` 的 `publications` |
 | 竞赛 / 荣誉 | `src/data/profile.ts` 的 `competitions` / `honors` |
+| Personal 文案与补充社交链接 | `src/data/profile.ts` 的 `personal` / `personalLinks` |
 | 页面区块顺序、导航锚点 | `src/components/ProfilePage.astro`（`navItems`） |
 | 侧栏信息结构 | `src/components/Sidebar.astro` |
 | 视觉样式与响应式 | `src/styles/global.css` |

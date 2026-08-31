@@ -1,31 +1,28 @@
 ---
-import { siGithub, siX, siXiaohongshu, siZhihu } from "simple-icons";
+import { siGithub, siZhihu } from "simple-icons";
 import { profile } from "../data/profile";
 
 const mailHref = `mailto:${profile.email}`;
 const brandIcons = {
   github: siGithub,
-  x: siX,
-  zhihu: siZhihu,
-  xiaohongshu: siXiaohongshu
+  zhihu: siZhihu
 };
 
 const getBrandIcon = (item: { label: string; url: string }) => {
   if (item.url.includes("github.com")) return brandIcons.github;
-  if (item.url.includes("x.com")) return brandIcons.x;
-  if (item.url.includes("zhihu.com")) return brandIcons.zhihu;
-  return brandIcons.xiaohongshu;
+  return brandIcons.zhihu;
 };
 
 const getBrandKey = (item: { url: string }) => {
   if (item.url.includes("github.com")) return "github";
-  if (item.url.includes("x.com")) return "x";
-  if (item.url.includes("zhihu.com")) return "zhihu";
-  return "xiaohongshu";
+  return "zhihu";
 };
 ---
 
-<aside class="sidebar">
+<aside class="sidebar" id="profile-sidebar" data-profile-sidebar aria-label="Profile information">
+  <button class="sidebar-close" type="button" data-sidebar-close aria-label="Close profile panel">
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
+  </button>
   <div class="s-head">
     <a class="avatar" href="/" aria-label="Yuhang Yang profile">
       <img src={profile.avatar} alt={profile.displayName.en} />
@@ -44,30 +41,25 @@ const getBrandKey = (item: { url: string }) => {
     </p>
   </div>
 
-  <div class="s-meta">
+  <div class="s-details">
     <div class="s-row">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/></svg>
       <span data-locale="en">{profile.location.en}</span>
       <span data-locale="zh">{profile.location.zh}</span>
-    </div>
-    <div class="s-row">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14.25 3.75 9.75 12 5.25l8.25 4.5L12 14.25Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 11.4v4.35c0 1.55 2.35 2.8 5.25 2.8s5.25-1.25 5.25-2.8V11.4M20.25 9.75v5.25"/></svg>
-      <span data-locale="en">{profile.study.en}</span>
-      <span data-locale="zh">{profile.study.zh}</span>
     </div>
     <div class="s-row s-description">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 1.5v2.25M12 20.25v2.25M1.5 12h2.25M20.25 12h2.25"/></svg>
       <span data-locale="en">{profile.description.en}</span>
       <span data-locale="zh">{profile.description.zh}</span>
     </div>
-    <a class="s-row" href={mailHref}>
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
-      {profile.email}
+    <a class="s-link s-email-link" href={mailHref}>
+      <span class="s-brand-mark" aria-hidden="true">
+        <svg class="brand-icon brand-icon-stroke" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-8.57 5.27a2.25 2.25 0 0 1-2.36 0L2.25 6.75" /></svg>
+      </span>
+      <span class="s-link-label">Email</span>
+      <svg class="s-link-arrow" fill="none" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5h8v8M15 5 6 14" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
-  </div>
-
-  <div class="s-links">
-    {profile.socials.map((item) => (
+    {profile.primarySocials.map((item) => (
       <a class="s-link" href={item.url} target="_blank" rel="noopener noreferrer" style={`--brand-color: #${getBrandIcon(item).hex}`}>
         <span class="s-brand-mark" data-brand={getBrandKey(item)} aria-hidden="true">
           <svg class="brand-icon" viewBox="0 0 24 24">
@@ -86,9 +78,4 @@ const getBrandKey = (item: { url: string }) => {
     <span data-locale="zh">下载简历</span>
   </a>
 
-  <div class="language-switch" aria-label="Language switch">
-    <button class="is-active" type="button" data-language-button="en" aria-pressed="true">EN</button>
-    <span aria-hidden="true">·</span>
-    <button type="button" data-language-button="zh" aria-pressed="false">中文</button>
-  </div>
 </aside>

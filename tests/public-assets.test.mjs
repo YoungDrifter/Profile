@@ -13,14 +13,3 @@ test("public assets use a root avatar without legacy image or files directories"
   assert.ok(html.includes('<img src="/avatar.png"'), "rendered avatar should load from the public root");
   assert.equal(html.includes("/images/avatar.png"), false, "legacy avatar path should not render");
 });
-
-test("Repository action renders a GitHub icon", async () => {
-  const html = await readFile(new URL("dist/index.html", projectRoot), "utf8");
-  const repositoryStart = html.indexOf('class="pub-action card-resource-action project-repository-link"');
-  const repositoryEnd = html.indexOf("</a>", repositoryStart);
-  const repositoryAction = html.slice(repositoryStart, repositoryEnd);
-
-  assert.ok(repositoryStart >= 0 && repositoryEnd > repositoryStart, "Repository action should render");
-  assert.ok(repositoryAction.includes('class="repository-icon"'), "Repository action should identify its GitHub icon");
-  assert.ok(repositoryAction.includes('fill="currentColor"'), "GitHub icon should use the action color");
-});
