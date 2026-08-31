@@ -11,13 +11,13 @@
 %%   \begin{document}
 %%   \makecvheader
 %%   \cvsection{Education}
-%%   \begin{cvproject}[URL]{dates}{title}{context} ... \end{cvproject}
+%%   \begin{cvproject}[URL]{dates}{title}{role}{context} ... \end{cvproject}
 %%   ...
 %%   \end{document}
 %% ================================================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cv}[2026/08/22 v1.0 Classical academic CV]
+\ProvidesPackage{cv}[2026/08/31 v1.1 Classical academic CV]
 
 \RequirePackage{iftex}
 \RequireXeTeX
@@ -40,13 +40,19 @@
   BoldItalicFont=texgyrepagella-bolditalic.otf,
   Ligatures=TeX]
 \RequirePackage{xeCJK}
-\setCJKmainfont{gbsn00lp.ttf}[
-  AutoFakeBold=2,
-  ItalicFont=gkai00mp.ttf,
-  BoldItalicFont=gkai00mp.ttf,
-  SmallCapsFont=gbsn00lp.ttf]
-\setCJKsansfont{gbsn00lp.ttf}[AutoFakeBold=2]
-\setCJKmonofont{gbsn00lp.ttf}
+\IfFontExistsTF{Songti SC}{
+  \setCJKmainfont{Songti SC}[
+    BoldFont={Songti SC Bold},
+    ItalicFont=gkai00mp.ttf,
+    BoldItalicFont=gkai00mp.ttf]
+}{
+  \setCJKmainfont{FandolSong-Regular.otf}[
+    BoldFont=FandolSong-Bold.otf,
+    ItalicFont=FandolKai-Regular.otf,
+    BoldItalicFont=FandolKai-Regular.otf]
+}
+\setCJKsansfont{FandolHei-Regular.otf}[BoldFont=FandolHei-Bold.otf]
+\setCJKmonofont{FandolFang-Regular.otf}
 \newCJKfontfamily\cv@sectioncjk{FandolHei-Regular.otf}[
   BoldFont=FandolHei-Bold.otf,
   SmallCapsFont=FandolHei-Regular.otf,
@@ -158,7 +164,7 @@
 
 %% Section heading
 \newcommand{\cvsection}[1]{%
-  \par\needspace{5\baselineskip}%
+  \par\needspace{7\baselineskip}%
   \vspace{0.9em}%
   {\large\cv@sectioncjk\bfseries\scshape #1\par}%
   \vspace{0.18em}%
@@ -179,11 +185,12 @@
 }
 
 %% Academic or technical project with an optional linked title.
-\NewDocumentEnvironment{cvproject}{O{} m m m}{%
+%% Arguments: URL, dates, title, role, technical or institutional context.
+\NewDocumentEnvironment{cvproject}{O{} m m m m}{%
   \par\needspace{4.2\baselineskip}%
-  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3.15cm}@{}}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{4.4cm}@{}}
     \ifstrempty{#1}{\textbf{#3}}{\href{#1}{\textbf{#3}}} & \textbf{#2} \\
-    \textit{#4} &
+    \textit{#5} & #4
   \end{tabularx}%
   \par\nobreak\vspace{0.18em}\ignorespaces
 }{%
@@ -202,13 +209,23 @@
   ]
 }{\end{itemize}}
 
-%% Publication entry. The title becomes a link when the optional URL is set.
+%% Publication entry. Arguments: URL, date, title, authors, venue or status.
 \NewDocumentCommand{\cvpublication}{O{} m m m m}{%
-  \par\needspace{2.8\baselineskip}%
-  \hangindent=1.25em\hangafter=1
-  #2.
-  \ifstrempty{#1}{``#3.''}{\href{#1}{``#3.''}}
-  \textit{#4}, #5.\par\vspace{0.42em}%
+  \par\needspace{3.2\baselineskip}%
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{4.4cm}@{}}
+    \ifstrempty{#1}{\textbf{#3}}{\href{#1}{\textbf{#3}}} & \textbf{#2} \\
+    #4\ifstrempty{#5}{}{.} & \ifstrempty{#5}{}{\textit{#5}}
+  \end{tabularx}%
+  \par\vspace{0.42em}%
+}
+
+%% Dated one-line entry with the date aligned to the common right axis.
+\NewDocumentCommand{\cvdateditem}{m m}{%
+  \par\needspace{2.5\baselineskip}%
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\bfseries\raggedleft\arraybackslash}p{3.15cm}@{}}
+    #1 & #2
+  \end{tabularx}%
+  \par\vspace{0.32em}%
 }
 
 %% Labelled one-line or wrapping item.

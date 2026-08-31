@@ -18,10 +18,6 @@
 
 \makecvheader
 
-\cvsection{Research Interests}
-
-主要关注 Optimization Theory、Natural Language Processing（NLP）与 Large Language Models（LLMs），希望将计算数学基础与模型实践结合起来，理解相关方法的理论依据、实现方式及其在实际训练中的表现。
-
 \cvsection{Education}
 
 \begin{cventry}{2024--2028（预计）}{B.Sc. in Information and Computational Science}{南京大学数学学院}{Nanjing, China}
@@ -32,28 +28,32 @@
 \end{cvitems}
 \end{cventry}
 
+\cvsection{Research Interests}
+
+研究兴趣包括 Optimization Theory、Natural Language Processing（NLP）与 Large Language Models（LLMs），关注数学理论、模型实现与训练行为之间的联系。
+
 \cvsection{Projects}
 
-\begin{cvproject}[https://github.com/YoungDrifter/min-GPT]{2026.08}{min-GPT: A Handwritten Conversational GPT}{Independent Project · PyTorch · GPT-2 · DailyDialog · W\&B}
+\begin{cvproject}[https://github.com/YoungDrifter/min-GPT]{2026.08}{min-GPT: A From-Scratch Conversational GPT}{Independent Developer}{PyTorch · GPT-2 · DailyDialog · W\&B}
 \begin{cvitems}
-  \item 使用 PyTorch 手写 GPT-2 byte-level BPE tokenizer、Causal Self-Attention、MLP 与 Pre-LN Decoder-only Transformer，并导入 DialoGPT-small 预训练权重。
-  \item 在 DailyDialog 上采用 reply-only loss 进行 full-parameter fine-tuning；Full-test perplexity 由 \textbf{42.34} 降至 \textbf{14.28}。
+  \item 使用 PyTorch 手写 GPT-2 byte-level BPE tokenizer、Causal Self-Attention、MLP 与 Pre-LN Decoder-only Transformer，并加载 DialoGPT-small 预训练权重。
+  \item 在 DailyDialog 上采用 reply-only loss 进行 full-parameter fine-tuning；test-set perplexity 由 \textbf{42.34} 降至 \textbf{14.28}。
 \end{cvitems}
 \end{cvproject}
+
+\cvsection{Competitions}
+
+\cvdateditem{\textbf{Second Prize} · 全国大学生数学竞赛（江苏赛区）}{2025}
+\cvdateditem{\textbf{Third Prize} · 全国大学生数学建模竞赛（江苏赛区）}{2025}
+
+\cvsection{Honors}
+
+\cvdateditem{南京大学人民奖学金\textbf{二等奖}（专业前 20\%）}{2025}
 
 \cvsection{Technical Skills}
 
 \cvitem{Languages}{Python、C++}
 \cvitem{Frameworks}{PyTorch}
 \cvitem{Tools}{\LaTeX、Git、Weights \& Biases（W\&B）}
-
-\cvsection{Competitions}
-
-\cvitem{2025}{\textbf{Second Prize} · 全国大学生数学竞赛（江苏赛区）}
-\cvitem{2025}{\textbf{Third Prize} · 全国大学生数学建模竞赛（江苏赛区）}
-
-\cvsection{Honors}
-
-\cvitem{2025}{南京大学人民奖学金\textbf{二等奖}（专业前 20\%）}
 
 \end{document}
