@@ -19,6 +19,19 @@ test("global navigation wraps home, section navigation, and language controls ab
   assert.ok(shell > language, "the two-pane shell should render below the global header");
 });
 
+test("education precedes technical skills in both navigation and page flow", () => {
+  const headerStart = html.indexOf('class="site-header"');
+  const headerEnd = html.indexOf('class="shell"', headerStart);
+  const header = html.slice(headerStart, headerEnd);
+  const educationNav = header.indexOf('href="#education"');
+  const skillsNav = header.indexOf('href="#skills"');
+  const educationSection = html.indexOf('id="education"');
+  const skillsSection = html.indexOf('id="skills"');
+
+  assert.ok(educationNav >= 0 && skillsNav > educationNav, "Education should be the second navigation destination, before Skills");
+  assert.ok(educationSection >= 0 && skillsSection > educationSection, "Education should be the second page section, before Technical Skills");
+});
+
 test("sidebar keeps primary contacts while personal owns secondary social links", () => {
   const sidebarStart = html.indexOf('class="sidebar"');
   const sidebarEnd = html.indexOf("</aside>", sidebarStart);
@@ -32,8 +45,14 @@ test("sidebar keeps primary contacts while personal owns secondary social links"
   const emailStart = sidebar.indexOf('class="s-link s-email-link"');
   const emailEnd = sidebar.indexOf("</a>", emailStart);
   const emailLink = sidebar.slice(emailStart, emailEnd);
-  assert.ok(emailLink.includes(">Email<"), "the email row should use the concise Email label");
-  assert.equal(emailLink.includes(">yuhangyang@smail.nju.edu.cn<"), false, "the email address should not be exposed as visible copy");
+  assert.ok(emailLink.includes(">yuhangyang@smail.nju.edu.cn<"), "the email row should expose the complete address");
+  assert.equal(emailLink.includes(">Email<"), false, "the generic Email label should be replaced by the address");
+  const role = sidebar.indexOf("Undergraduate Student");
+  const institution = sidebar.indexOf("School of Mathematics · Nanjing University");
+  const location = sidebar.indexOf("Nanjing, China");
+  assert.ok(role >= 0 && institution > role && location > institution, "the sidebar should show the role alone, then school and university above the location");
+  assert.ok(sidebar.includes(">Focused on Math &amp; AI<"), "the sidebar focus line should use the approved Focused on Math & AI copy");
+  assert.ok(sidebar.includes(">专注数学与 AI<"), "the Chinese sidebar focus line should mirror the approved concise copy");
   assert.ok(sidebar.includes("https://github.com/YoungDrifter"), "GitHub should stay in the sidebar");
   assert.ok(sidebar.includes("https://www.zhihu.com/people/emrysyang"), "Zhihu should stay in the sidebar");
   assert.equal(sidebar.includes("https://x.com/Yuhangar"), false, "X should leave the sidebar");
@@ -124,11 +143,12 @@ test("competitions and honors place names left, periods right, and omit awarding
     const start = html.indexOf(`id="${id}"`);
     const end = html.indexOf(`id="${nextId}"`, start + 10);
     const section = html.slice(start, end);
-    const row = section.indexOf('class="award-item"');
+    const list = section.indexOf('<ul class="award-list">');
+    const row = section.indexOf('<li class="award-item">');
     const name = section.indexOf('class="award-name"');
     const period = section.indexOf('class="award-yr"');
 
-    assert.ok(row >= 0 && name > row && period > name, `${id} should render name before right-aligned period`);
+    assert.ok(list >= 0 && row > list && name > row && period > name, `${id} should render semantic unordered-list items with names before right-aligned periods`);
     assert.equal(section.includes('class="award-org"'), false, `${id} should not render awarding organizations`);
   }
 });

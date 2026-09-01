@@ -6,8 +6,8 @@ import { competitions, education, honors, internships, personal, personalLinks, 
 
 const navItems = [
   { href: "#about", en: "About", zh: "关于" },
-  { href: "#skills", en: "Skills", zh: "技能" },
   { href: "#education", en: "Education", zh: "教育" },
+  { href: "#skills", en: "Skills", zh: "技能" },
   { href: "#internships", en: "Internships", zh: "实习" },
   { href: "#publications", en: "Publications", zh: "论文" },
   { href: "#competitions", en: "Competitions", zh: "竞赛经历" },
@@ -112,28 +112,6 @@ const personalIconMap: Record<string, { path: string }> = {
           </div>
         </section>
 
-        <section class="sec" id="skills">
-          <div class="sec-h">
-            <span data-locale="en">Technical Skills</span>
-            <span data-locale="zh">技术能力</span>
-          </div>
-          <dl class="skills-list">
-            {
-              technicalSkills.map((group) => (
-                <div class="skill-row">
-                  <dt class="skill-label">
-                    <span data-locale="en">{group.label.en}</span>
-                    <span data-locale="zh">{group.label.zh}</span>
-                  </dt>
-                  <dd class="skill-items">
-                    {group.items.map((item) => <span class="skill-item">{item}</span>)}
-                  </dd>
-                </div>
-              ))
-            }
-          </dl>
-        </section>
-
         <section class="sec" id="education">
           <div class="sec-h">
             <span data-locale="en">Education</span>
@@ -185,6 +163,28 @@ const personalIconMap: Record<string, { path: string }> = {
               ))
             }
           </div>
+        </section>
+
+        <section class="sec" id="skills">
+          <div class="sec-h">
+            <span data-locale="en">Technical Skills</span>
+            <span data-locale="zh">技术能力</span>
+          </div>
+          <dl class="skills-list">
+            {
+              technicalSkills.map((group) => (
+                <div class="skill-row">
+                  <dt class="skill-label">
+                    <span data-locale="en">{group.label.en}</span>
+                    <span data-locale="zh">{group.label.zh}</span>
+                  </dt>
+                  <dd class="skill-items">
+                    {group.items.map((item) => <span class="skill-item">{item}</span>)}
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
         </section>
 
         <section class="sec" id="internships">
@@ -254,12 +254,6 @@ const personalIconMap: Record<string, { path: string }> = {
                         <span data-locale="en">{publication.title.en}</span>
                         <span data-locale="zh">{publication.title.zh}</span>
                       </div>
-                      <div class="publication-period-venue">
-                        {publication.year}
-                        <span> · </span>
-                        <span data-locale="en">{publication.venue.en}</span>
-                        <span data-locale="zh">{publication.venue.zh}</span>
-                      </div>
                     </div>
                     <div class="publication-authors">
                       {publication.authors.map((author, index) => (
@@ -272,18 +266,36 @@ const personalIconMap: Record<string, { path: string }> = {
                     <div class="publication-resources">
                       {
                         publication.pdf ? (
-                          <a class="publication-resource-link publication-pdf-link" href={publication.pdf} target="_blank" rel="noopener noreferrer">PDF</a>
+                          <a class="publication-resource-link publication-pdf-link" href={publication.pdf} target="_blank" rel="noopener noreferrer">
+                            <svg class="publication-resource-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5.25 2.25h5.1l2.4 2.4v11.1h-7.5V2.25Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M10.25 2.5v2.75H13M7.1 9h3.8M7.1 11.5h3.8" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>PDF</span>
+                          </a>
                         ) : (
-                          <span class="publication-resource-link publication-pdf-link is-unavailable" aria-disabled="true">PDF</span>
+                          <span class="publication-resource-link publication-pdf-link is-unavailable" aria-disabled="true">
+                            <svg class="publication-resource-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5.25 2.25h5.1l2.4 2.4v11.1h-7.5V2.25Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/><path d="M10.25 2.5v2.75H13M7.1 9h3.8M7.1 11.5h3.8" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>PDF</span>
+                          </span>
                         )
                       }
                       {
                         publication.code ? (
-                          <a class="publication-resource-link publication-code-link" href={publication.code} target="_blank" rel="noopener noreferrer">Code</a>
+                          <a class="publication-resource-link publication-code-link" href={publication.code} target="_blank" rel="noopener noreferrer">
+                            <svg class="publication-resource-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m6.75 5.75-3 3.25 3 3.25M11.25 5.75l3 3.25-3 3.25M10 3.75 8 14.25" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Code</span>
+                          </a>
                         ) : (
-                          <span class="publication-resource-link publication-code-link is-unavailable" aria-disabled="true">Code</span>
+                          <span class="publication-resource-link publication-code-link is-unavailable" aria-disabled="true">
+                            <svg class="publication-resource-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m6.75 5.75-3 3.25 3 3.25M11.25 5.75l3 3.25-3 3.25M10 3.75 8 14.25" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Code</span>
+                          </span>
                         )
                       }
+                      <div class="publication-period-venue">
+                        {publication.year}
+                        <span> · </span>
+                        <span data-locale="en">{publication.venue.en}</span>
+                        <span data-locale="zh">{publication.venue.zh}</span>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -297,19 +309,19 @@ const personalIconMap: Record<string, { path: string }> = {
             <span data-locale="en">Competitions</span>
             <span data-locale="zh">竞赛经历</span>
           </div>
-          <div class="award-list">
+          <ul class="award-list">
             {
               competitions.map((item) => (
-                <div class="award-item">
+                <li class="award-item">
                   <div class="award-name">
                     <span data-locale="en">{item.title.en}</span>
                     <span data-locale="zh">{item.title.zh}</span>
                   </div>
                   <div class="award-yr">{item.period}</div>
-                </div>
+                </li>
               ))
             }
-          </div>
+          </ul>
         </section>
 
         <section class="sec" id="honors">
@@ -317,19 +329,19 @@ const personalIconMap: Record<string, { path: string }> = {
             <span data-locale="en">Honors & Awards</span>
             <span data-locale="zh">荣誉奖项</span>
           </div>
-          <div class="award-list">
+          <ul class="award-list">
             {
               honors.map((item) => (
-                <div class="award-item">
+                <li class="award-item">
                   <div class="award-name">
                     <span data-locale="en">{item.title.en}</span>
                     <span data-locale="zh">{item.title.zh}</span>
                   </div>
                   <div class="award-yr">{item.period}</div>
-                </div>
+                </li>
               ))
             }
-          </div>
+          </ul>
         </section>
 
         <section class="sec personal-section" id="personal">

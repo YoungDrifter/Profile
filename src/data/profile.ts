@@ -54,13 +54,17 @@ export const profile = {
     en: "Nanjing University",
     zh: "南京大学"
   },
+  affiliation: {
+    en: "School of Mathematics · Nanjing University",
+    zh: "数学学院 · 南京大学"
+  },
   location: {
     en: "Nanjing, China",
     zh: "中国 · 南京"
   },
   description: {
-    en: "Focused on understanding mathematics and AI",
-    zh: "专注数学与 AI 理解"
+    en: "Focused on Math & AI",
+    zh: "专注数学与 AI"
   },
   email: "yuhangyang@smail.nju.edu.cn",
   avatar: "/avatar.png",
