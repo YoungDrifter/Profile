@@ -30,6 +30,7 @@ const {
     <script is:inline>
       const root = document.documentElement;
       const preferred = localStorage.getItem("site-language") || "en";
+      const shell = document.querySelector(".shell");
       const main = document.querySelector("[data-scroll-main]");
       const siteHeader = document.querySelector(".site-header");
       const sidebar = document.querySelector("[data-profile-sidebar]");
@@ -39,6 +40,10 @@ const {
       const sectionTrigger = document.querySelector("[data-section-trigger]");
       const sectionMenu = document.querySelector("[data-section-menu]");
       const sectionCurrent = document.querySelector("[data-section-current]");
+      const wechatTrigger = document.querySelector("[data-wechat-trigger]");
+      const wechatModal = document.querySelector("[data-wechat-modal]");
+      const wechatClose = document.querySelector("[data-wechat-close]");
+      const wechatBackdrop = document.querySelector("[data-wechat-backdrop]");
       const sections = Array.from(document.querySelectorAll(".sec[id]"));
       const links = Array.from(document.querySelectorAll("[data-section-link][href^='#']"));
       const narrowScreen = window.matchMedia("(max-width: 860px)");
@@ -110,6 +115,28 @@ const {
         sidebarClose?.focus();
       };
 
+      const closeWechat = ({ restoreFocus = false } = {}) => {
+        if (!wechatModal) return;
+        root.classList.remove("wechat-open");
+        wechatModal.hidden = true;
+        wechatTrigger?.setAttribute("aria-expanded", "false");
+        if (siteHeader) siteHeader.inert = false;
+        if (shell) shell.inert = false;
+        if (restoreFocus) wechatTrigger?.focus();
+      };
+
+      const openWechat = () => {
+        if (!wechatModal) return;
+        closeSectionMenu();
+        closeSidebar();
+        root.classList.add("wechat-open");
+        wechatModal.hidden = false;
+        wechatTrigger?.setAttribute("aria-expanded", "true");
+        if (siteHeader) siteHeader.inert = true;
+        if (shell) shell.inert = true;
+        wechatClose?.focus();
+      };
+
       homeTrigger?.addEventListener("click", () => {
         if (narrowScreen.matches) {
           if (root.classList.contains("sidebar-open")) closeSidebar({ restoreFocus: true });
@@ -123,6 +150,9 @@ const {
 
       sidebarClose?.addEventListener("click", () => closeSidebar({ restoreFocus: true }));
       sidebarBackdrop?.addEventListener("click", () => closeSidebar({ restoreFocus: true }));
+      wechatTrigger?.addEventListener("click", openWechat);
+      wechatClose?.addEventListener("click", () => closeWechat({ restoreFocus: true }));
+      wechatBackdrop?.addEventListener("click", () => closeWechat({ restoreFocus: true }));
 
       sectionTrigger?.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -140,8 +170,22 @@ const {
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
-          if (root.classList.contains("sidebar-open")) closeSidebar({ restoreFocus: true });
+          if (root.classList.contains("wechat-open")) closeWechat({ restoreFocus: true });
+          else if (root.classList.contains("sidebar-open")) closeSidebar({ restoreFocus: true });
           else if (sectionTrigger?.getAttribute("aria-expanded") === "true") closeSectionMenu({ restoreFocus: true });
+          return;
+        }
+        if (event.key === "Tab" && root.classList.contains("wechat-open") && wechatModal) {
+          const focusable = Array.from(wechatModal.querySelectorAll('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'));
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
           return;
         }
         if (event.key === "Tab" && root.classList.contains("sidebar-open") && sidebar) {

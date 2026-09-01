@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("publication card renders venue/date, title, multiple authors, then resource actions", async () => {
+test("publication card renders title with date and venue, then multiple authors and resource actions", async () => {
   const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
   const publicationsStart = html.indexOf('id="publications"');
   const publicationsEnd = html.indexOf('id="competitions"', publicationsStart);
@@ -21,10 +21,11 @@ test("publication card renders venue/date, title, multiple authors, then resourc
 
   assert.ok(publicationsStart >= 0 && publicationsEnd > publicationsStart, "publication section should render");
   assert.ok(list >= 0 && card > list, "publications should render as cards");
-  assert.ok(venueAndDate > card, "date and venue should render on the first content row");
-  assert.ok(heading > venueAndDate, "title should render on the second content row");
-  assert.ok(title > heading, "the title should render inside its heading row");
-  assert.ok(authors > title && self > authors, "multiple authors should follow the title and emphasize Yuhang Yang");
+  assert.ok(heading > card, "the first content row should render inside the card");
+  assert.ok(title > heading && venueAndDate > title, "title should appear left of date and venue on the first row");
+  assert.ok(authors > venueAndDate && self > authors, "multiple authors should follow the first row and emphasize Yuhang Yang");
+  assert.ok(publications.includes("Minghao Chen"), "the placeholder publication should retain a coauthor before Yuhang Yang");
+  assert.ok(publications.includes("Zihan Liu"), "the placeholder publication should retain a coauthor after Yuhang Yang");
   assert.ok(resources > authors && pdfAction > resources && codeAction > pdfAction, "PDF and Code should share a resource row below the authors");
   assert.equal(publications.includes("PDF · Unavailable"), false, "unavailable PDF label should stay compact on narrow screens");
   assert.equal(publications.includes("publication-timeline"), false, "the legacy timeline should not render");

@@ -104,6 +104,12 @@ export const personal: PersonalSection = {
 };
 
 export const personalLinks: SocialLink[] = [
+  { label: "Email", url: "mailto:yuhangyang@smail.nju.edu.cn" },
+  { label: "WeChat", url: "#wechat" },
+  { label: "GitHub", url: "https://github.com/YoungDrifter" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/yuhangar/" },
+  { label: "Zhihu", url: "https://www.zhihu.com/people/emrysyang" },
+  { label: "YouTube", url: "https://www.youtube.com/@Yuhangar" },
   { label: "X", url: "https://x.com/Yuhangar" },
   { label: "Xiaohongshu", url: "https://www.xiaohongshu.com/user/profile/6a0dd2930000000001007000" }
 ];
