@@ -39,7 +39,7 @@ npm run check   # Astro / TypeScript 类型检查
 ├── .github/workflows/   # GitHub Pages 自动部署流程
 ├── public/
 │   ├── cv/              # 简历 XeLaTeX 源码与编译产物
-│   ├── avatar.png       # 主页头像
+│   ├── avatar.jpg       # 主页头像
 │   ├── CNAME            # 自定义域名配置
 │   └── favicon.svg
 ├── src/
