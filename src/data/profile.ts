@@ -68,7 +68,7 @@ export const profile = {
   },
   email: "yuhangyang@smail.nju.edu.cn",
   avatar: "/avatar.jpg",
-  cv: "/cv/yuhang_yang_cv.pdf",
+  cv: "/yuhang_yang_cv.pdf",
   motto: {
     en: "Search the World and Find Myself",
     zh: "看世界也找自己"

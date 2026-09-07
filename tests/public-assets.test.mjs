@@ -16,3 +16,13 @@ test("public assets use a root avatar without legacy image or files directories"
   assert.ok(html.includes('<img src="/wechat_id_code.jpg"'), "rendered WeChat dialog should load its QR image from the public root");
   assert.equal(html.includes("/images/avatar.png"), false, "legacy avatar path should not render");
 });
+
+test("published CV is available from the public root and the download link uses it", async () => {
+  await access(new URL("public/yuhang_yang_cv.pdf", projectRoot));
+
+  const html = await readFile(new URL("dist/index.html", projectRoot), "utf8");
+  assert.ok(
+    html.includes('href="/yuhang_yang_cv.pdf"'),
+    "rendered CV download should load from the public root",
+  );
+});

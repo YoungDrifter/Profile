@@ -24,3 +24,6 @@ pnpm-debug.log*
 # Local agent planning artifacts
 .superpowers/
 docs/superpowers/
+
+# Local CV source and build artifacts
+/cv/

@@ -8,7 +8,7 @@
 - 完整学术履历展示：关于、技术能力、教育、实习、论文、竞赛、荣誉与个人介绍
 - 响应式布局：桌面双栏独立滚动，窄屏使用个人资料抽屉与区块导航
 - 自动生成 sitemap 与 SEO 元信息
-- 简历以 XeLaTeX 源码维护，随项目一起版本化管理
+- 简历源码在本地使用 XeLaTeX 维护，网站仓库仅发布编译后的 PDF
 
 ## 技术栈
 
@@ -38,10 +38,10 @@ npm run check   # Astro / TypeScript 类型检查
 .
 ├── .github/workflows/   # GitHub Pages 自动部署流程
 ├── public/
-│   ├── cv/              # 简历 XeLaTeX 源码与编译产物
 │   ├── avatar.jpg       # 主页头像
 │   ├── CNAME            # 自定义域名配置
-│   └── favicon.svg
+│   ├── favicon.svg
+│   └── yuhang_yang_cv.pdf # 网站发布的简历 PDF
 ├── src/
 │   ├── components/      # 页面组件（ProfilePage、Sidebar）
 │   ├── data/            # 结构化内容数据（profile.ts）
@@ -72,14 +72,15 @@ npm run check   # Astro / TypeScript 类型检查
 
 ## 简历
 
-简历源码位于 `public/cv/`，使用 XeLaTeX 编译：
+简历源码在本地根目录的 `cv/` 中维护。该目录已被 Git 忽略，使用 XeLaTeX 编译后，将生成的 PDF 复制到 `public/` 供网站发布：
 
 ```bash
-cd public/cv
+cd cv
 latexmk -xelatex -gg -interaction=nonstopmode -halt-on-error yuhang_yang_cv.tex
+cp yuhang_yang_cv.pdf ../public/yuhang_yang_cv.pdf
 ```
 
-编译产物 `yuhang_yang_cv.pdf` 即侧栏 “Download CV / 下载简历” 按钮指向的文件。
+侧栏 “Download CV / 下载简历” 按钮指向 `/yuhang_yang_cv.pdf`。
 
 ## 部署
 
