@@ -742,6 +742,28 @@ svg {
   margin-top: 0.25rem;
 }
 
+.publication-note {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: -0.65rem 0 1.15rem;
+  color: var(--ink-3);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.publication-note-marker,
+.publication-author-marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.publication-author-marker {
+  margin-left: 1px;
+  font-size: 0.7em;
+  line-height: 0;
+}
+
 .publication-list {
   display: grid;
   gap: 1rem;

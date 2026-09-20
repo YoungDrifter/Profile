@@ -32,3 +32,21 @@ test("publication card renders title, authors, then resource actions followed by
   assert.equal(publications.includes('class="content-tags"'), false, "publication topics should not render");
   assert.equal(publications.includes('class="pub-summary"'), false, "publication description should not render");
 });
+
+test("publications open with an equal-contribution note and mark co-first authors", async () => {
+  const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+  const publicationsStart = html.indexOf('id="publications"');
+  const publicationsEnd = html.indexOf('id="competitions"', publicationsStart);
+  const publications = html.slice(publicationsStart, publicationsEnd);
+
+  const note = publications.indexOf('class="publication-note"');
+  const list = publications.indexOf('class="publication-list"');
+
+  assert.ok(note > 0 && note < list, "the equal-contribution note should lead the publications section");
+  assert.ok(publications.includes("Equal contribution"), "the note should explain equal contribution in English");
+  assert.ok(publications.includes("共同贡献"), "the note should explain equal contribution in Chinese");
+  assert.equal((publications.match(/class="publication-author-marker"/g) || []).length, 2, "both co-first authors should carry the marker");
+  assert.ok(/Minghao Chen<\/span> <sup class="publication-author-marker">/.test(publications), "the marker should follow the co-first author name");
+  assert.ok(publications.includes('<span class="publication-author-self">Yuhang Yang</span> <sup class="publication-author-marker">'), "Yuhang Yang should stay emphasized while marked as co-first author");
+  assert.equal(publications.includes("Zihan Liu</span> <sup"), false, "non-co-first authors should stay unmarked");
+});

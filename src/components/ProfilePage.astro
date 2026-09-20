@@ -2,7 +2,7 @@
 import Sidebar from "./Sidebar.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siGithub, siWechat, siX, siXiaohongshu, siYoutube, siZhihu } from "simple-icons";
-import { competitions, education, honors, internships, personal, personalLinks, profile, publications, technicalSkills } from "../data/profile";
+import { competitions, education, honors, internships, personal, personalLinks, profile, publicationNote, publications, technicalSkills } from "../data/profile";
 
 const navItems = [
   { href: "#about", en: "About", zh: "关于" },
@@ -243,6 +243,11 @@ const personalIconMap: Record<string, { path: string }> = {
             <span data-locale="en">Publications</span>
             <span data-locale="zh">论文</span>
           </div>
+          <p class="publication-note">
+            <span class="publication-note-marker" aria-hidden="true">†</span>
+            <span data-locale="en">{publicationNote.en}</span>
+            <span data-locale="zh">{publicationNote.zh}</span>
+          </p>
           <div class="publication-list">
             {
               publications.map((publication) => (
@@ -259,6 +264,7 @@ const personalIconMap: Record<string, { path: string }> = {
                       {publication.authors.map((author, index) => (
                         <>
                           <span class={author === profile.name ? "publication-author-self" : undefined}>{author}</span>
+                          {publication.equalContribution?.includes(author) && <sup class="publication-author-marker">†</sup>}
                           {index < publication.authors.length - 1 && <span>, </span>}
                         </>
                       ))}

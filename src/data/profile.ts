@@ -26,8 +26,16 @@ export type Publication = {
   venue: Localized;
   title: Localized;
   authors: string[];
+  /** Author names sharing equal (co-first) contribution; marked with † in the card. */
+  equalContribution?: string[];
   pdf?: string;
   code?: string;
+};
+
+/** Legend shown at the top of the publications section, explaining the † marker. */
+export const publicationNote: Localized = {
+  en: "Equal contribution: authors marked with † are co-first authors who contributed equally to this work.",
+  zh: "共同贡献：标注 † 的作者为共同第一作者，对本工作贡献相同。"
 };
 
 export type SocialLink = {
@@ -244,6 +252,7 @@ export const publications: Publication[] = [
       en: "Publication Placeholder",
       zh: "论文占位"
     },
-    authors: ["Minghao Chen", "Yuhang Yang", "Zihan Liu"]
+    authors: ["Minghao Chen", "Yuhang Yang", "Zihan Liu"],
+    equalContribution: ["Minghao Chen", "Yuhang Yang"]
   }
 ];
